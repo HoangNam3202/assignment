@@ -7,8 +7,7 @@
     android:orientation="vertical"
     tools:context=".MonAnActivity">
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/listMonAn"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
