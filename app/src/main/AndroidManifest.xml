@@ -9,10 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".MonAnActivity"
+        <activity android:name=".TheLoaiMonActivity"
             android:theme="@style/Theme.AppCompat">
 
         </activity>
+        <activity
+            android:name=".MonAnActivity"
+            android:theme="@style/Theme.AppCompat"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

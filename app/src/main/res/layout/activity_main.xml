@@ -14,18 +14,14 @@
     tools:context=".MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@drawable/bg_item"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_height="100dp">
-
+        android:background="@drawable/bg_infor"
+        android:layout_height="110dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="25dp"
             android:layout_toEndOf="@+id/imageView"
             android:layout_toRightOf="@+id/imageView"
@@ -38,8 +34,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTenNguoiDung"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
             android:layout_marginTop="55dp"
             android:layout_toEndOf="@+id/imageView"
             android:layout_toRightOf="@+id/imageView"
@@ -72,24 +68,31 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="Món Ăn"
-            android:drawablePadding="10dp"
             android:padding="10dp"
-            android:drawableTop="@drawable/burger"
+            android:drawableLeft="@drawable/burger"
+            android:drawableRight="@drawable/burger"
             android:background="@drawable/bg_item"
             />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:text="Hóa Đơn"
-            android:drawablePadding="10dp"
-            android:padding="10dp"
-            android:drawableTop="@drawable/transactrionlist"
-            android:background="@drawable/bg_item"
-            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Hóa Đơn"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
+        android:drawableLeft="@drawable/transactrionlist"
+        android:drawableRight="@drawable/transactrionlist"
+        android:background="@drawable/bg_item"
+        />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -106,9 +109,16 @@
             android:text="Giỏ Hàng"
             android:drawablePadding="10dp"
             android:padding="10dp"
-            android:drawableTop="@drawable/cart"
+            android:drawableLeft="@drawable/cart"
+            android:drawableRight="@drawable/cart"
             android:background="@drawable/bg_item"
             />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +129,8 @@
             android:text="Cài Đặt"
             android:drawablePadding="10dp"
             android:padding="10dp"
-            android:drawableTop="@drawable/customer"
+            android:drawableLeft="@drawable/customer"
+            android:drawableRight="@drawable/customer"
             android:background="@drawable/bg_item"
             />
     </LinearLayout>

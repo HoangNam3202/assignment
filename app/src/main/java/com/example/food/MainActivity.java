@@ -1,6 +1,7 @@
 package com.example.food;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         btnMonAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,MonAnActivity.class);
+                Intent intent = new Intent(MainActivity.this,TheLoaiMonActivity.class);
                 startActivity(intent);
             }
         });
