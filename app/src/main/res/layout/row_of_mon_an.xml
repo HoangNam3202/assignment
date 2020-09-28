@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -46,7 +46,8 @@
             android:layout_marginTop="42dp"
             android:layout_toEndOf="@+id/imgHinhMonAn"
             android:layout_toRightOf="@+id/imgHinhMonAn"
-            android:text="Ten Quan'" />
+            android:text="Ten Quan'"
+            android:textColor="#000"/>
         <TextView
             android:id="@+id/tvDiaChi"
             android:layout_width="wrap_content"
@@ -58,6 +59,48 @@
             android:layout_marginTop="60dp"
             android:layout_toEndOf="@+id/imgHinhMonAn"
             android:layout_toRightOf="@+id/imgHinhMonAn"
-            android:text="Dia Chi'" />
+            android:text="Dia Chi'"
+            android:textColor="#000"    />
+
+        <TextView
+            android:id="@+id/tvGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_toStartOf="@+id/btnDatHang"
+            android:layout_toLeftOf="@+id/btnDatHang"
+            android:text="10"
+            android:textColor="#FFC107"
+            android:textSize="22dp" />
+        <TextView
+            android:id="@+id/tvDonVi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="33dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_toStartOf="@+id/btnDatHang"
+            android:layout_toLeftOf="@+id/btnDatHang"
+            android:text="$"
+            android:textColor="#FFC107"
+            android:textSize="22dp" />
+        <Button
+            android:id="@+id/btnDatHang"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/bg_item"
+            android:text="Đặt"
+            android:textColor="#000"
+            />
     </RelativeLayout>
 </RelativeLayout>

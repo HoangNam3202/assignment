@@ -1,4 +1,4 @@
-package com.example.food;
+package com.example.food.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,12 +51,14 @@ public class MonAnAdapter extends BaseAdapter {
         TextView tvTenMonAn = view.findViewById(R.id.tvTenMon);
         TextView tvTenQuan = view.findViewById(R.id.tvTenQuan);
         TextView tvDiaChi = view.findViewById(R.id.tvDiaChi);
+        TextView tvGia = view.findViewById(R.id.tvGia);
 
         MonAn monAn = monAnList.get(i);
         imageMonAn.setImageResource(monAn.getHinhAnh());
         tvTenMonAn.setText(monAn.getTenMonAn());
         tvTenQuan.setText(monAn.getTenQuan());
         tvDiaChi.setText(monAn.getDiaChi());
+        tvGia.setText(""+monAn.getGia());
 
 
         return view;

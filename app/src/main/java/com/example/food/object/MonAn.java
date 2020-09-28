@@ -6,13 +6,17 @@ public class MonAn {
     public String TenQuan;
     public String DiaChi;
     public int HinhAnh;
+    public int Gia;
 
-    public MonAn(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, int hinhAnh) {
+
+
+    public MonAn(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, int hinhAnh,int gia) {
         this.iDMonAn = iDMonAn;
         TenMonAn = tenMonAn;
         TenQuan = tenQuan;
         DiaChi = diaChi;
         HinhAnh = hinhAnh;
+        Gia = gia;
     }
 
     public int getiDMonAn() {
@@ -53,5 +57,13 @@ public class MonAn {
 
     public void setHinhAnh(int hinhAnh) {
         HinhAnh = hinhAnh;
+    }
+
+    public int getGia() {
+        return Gia;
+    }
+
+    public void setGia(int gia) {
+        Gia = gia;
     }
 }
