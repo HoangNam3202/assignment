@@ -25,7 +25,9 @@ public class MonAnActivity extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(MonAnActivity.this,"CSDL",null,1);
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS MonAn(Id Integer primary key autoincrement," +
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), Hinh Integer, Gia Integer)");
-        dataBaseHelper.UpData("Insert into MonAn Values(null,'Com Hai San','Muoi Kho','82 Hung Vuong','"+R.drawable.burger+"',35.000)");
+        dataBaseHelper.UpData("Delete from MonAn where TenMonAn = 'Com Hai San'");
+
+        dataBaseHelper.UpData("Insert into MonAn Values(null,'Com Hai San','Muoi Kho','82 Hung Vuong','"+R.drawable.comga+"',35.000)");
         Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
