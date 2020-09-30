@@ -5,12 +5,12 @@ public class MonAn {
     public String TenMonAn;
     public String TenQuan;
     public String DiaChi;
-    public int HinhAnh;
+    public byte[] HinhAnh;
     public int Gia;
 
 
 
-    public MonAn(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, int hinhAnh,int gia) {
+    public MonAn(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, byte[] hinhAnh,int gia) {
         this.iDMonAn = iDMonAn;
         TenMonAn = tenMonAn;
         TenQuan = tenQuan;
@@ -51,11 +51,11 @@ public class MonAn {
         DiaChi = diaChi;
     }
 
-    public int getHinhAnh() {
+    public byte[] getHinhAnh() {
         return HinhAnh;
     }
 
-    public void setHinhAnh(int hinhAnh) {
+    public void setHinhAnh(byte[] hinhAnh) {
         HinhAnh = hinhAnh;
     }
 

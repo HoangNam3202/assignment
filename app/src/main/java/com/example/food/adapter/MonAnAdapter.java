@@ -1,13 +1,17 @@
 package com.example.food.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -52,15 +56,25 @@ public class MonAnAdapter extends BaseAdapter {
         TextView tvTenQuan = view.findViewById(R.id.tvTenQuan);
         TextView tvDiaChi = view.findViewById(R.id.tvDiaChi);
         TextView tvGia = view.findViewById(R.id.tvGia);
+        Button btnDatMon = view.findViewById(R.id.btnDatHang);
+
 
         MonAn monAn = monAnList.get(i);
-        imageMonAn.setImageResource(monAn.getHinhAnh());
+
+        byte[] hinhAnh = monAn.getHinhAnh();
+        Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
+        imageMonAn.setImageBitmap(bitmap);
         tvTenMonAn.setText(monAn.getTenMonAn());
         tvTenQuan.setText(monAn.getTenQuan());
         tvDiaChi.setText(monAn.getDiaChi());
         tvGia.setText(""+monAn.getGia());
 
-
+        btnDatMon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 }
