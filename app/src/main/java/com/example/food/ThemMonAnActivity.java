@@ -51,7 +51,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                  TenTinhThanh = spin.getSelectedItem().toString();
                 if(country[i].equals("")){
-                    Toast.makeText(ThemMonAnActivity.this, "Chưa chọn", Toast.LENGTH_SHORT).show();
+
                 }
             }
 
@@ -85,6 +85,10 @@ public class ThemMonAnActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
                 byte[] anh = byteArray.toByteArray();
                 MonAnActivity.dataBaseHelper.INSERT_DOVAT(Ten_Mon,Ten_Quan,Dia_Chi,anh,Gia);
+                Toast.makeText(ThemMonAnActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ThemMonAnActivity.this,MonAnActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -108,6 +112,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
                 InputStream inputStream =getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView_MonAn.setImageBitmap(bitmap);
+                imageView_MonAn.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

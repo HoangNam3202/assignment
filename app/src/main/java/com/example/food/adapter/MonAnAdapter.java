@@ -18,12 +18,14 @@ import androidx.annotation.NonNull;
 import com.example.food.R;
 import com.example.food.object.MonAn;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MonAnAdapter extends BaseAdapter {
     public Context context;
     public int layout;
     public List<MonAn> monAnList;
+    public static ArrayList<Integer> ItemGiohang = new ArrayList();
 
     public MonAnAdapter(Context context, int layout, List<MonAn> monAnList) {
         this.context = context;
@@ -59,7 +61,7 @@ public class MonAnAdapter extends BaseAdapter {
         Button btnDatMon = view.findViewById(R.id.btnDatHang);
 
 
-        MonAn monAn = monAnList.get(i);
+        final MonAn monAn = monAnList.get(i);
 
         byte[] hinhAnh = monAn.getHinhAnh();
         Bitmap bitmap = BitmapFactory.decodeByteArray(hinhAnh,0,hinhAnh.length);
@@ -72,7 +74,8 @@ public class MonAnAdapter extends BaseAdapter {
         btnDatMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "abc", Toast.LENGTH_SHORT).show();
+                ItemGiohang.add(monAn.getiDMonAn());
+                Toast.makeText(context, ""+ItemGiohang, Toast.LENGTH_SHORT).show();
             }
         });
         return view;
