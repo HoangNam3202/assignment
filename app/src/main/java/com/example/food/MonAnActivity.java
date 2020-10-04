@@ -24,19 +24,22 @@ import java.util.ArrayList;
 
 public class MonAnActivity extends AppCompatActivity {
     public static DataBaseHelper dataBaseHelper;
+    public static ArrayList<MonAn> arr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mon_an);
         ListView listView_MonAn = findViewById(R.id.listMonAn);
-        final ArrayList<MonAn> arr = new ArrayList<>();
+        arr = new ArrayList<>();
         MonAnAdapter monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
         listView_MonAn.setAdapter(monAnAdapter);
 
         dataBaseHelper = new DataBaseHelper(MonAnActivity.this,"CSDL1",null,1);
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS MonAn(Id Integer primary key autoincrement," +
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), Hinh Blob, Gia Integer)");
-        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
+        dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
+                "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer)");
+//        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
 //        dataBaseHelper.UpData("Insert into MonAn Values(null,'Com Hai San','Muoi Kho','82 Hung Vuong','"+R.drawable.comga+"',351)");
         Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
         while (cursor.moveToNext()){
@@ -70,6 +73,10 @@ public class MonAnActivity extends AppCompatActivity {
             case R.id.mnu_Them:
                 Intent intent = new Intent(this,ThemMonAnActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.mnu_GioHang:
+                Intent inten = new Intent(this,GioHangActivity.class);
+                startActivity(inten);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

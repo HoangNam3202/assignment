@@ -1,6 +1,9 @@
 package com.example.food.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -16,16 +19,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.food.R;
+import com.example.food.ServiceGioHang;
 import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.food.MonAnActivity.arr;
+import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class MonAnAdapter extends BaseAdapter {
     public Context context;
     public int layout;
     public List<MonAn> monAnList;
     public static ArrayList<Integer> ItemGiohang = new ArrayList();
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public MonAnAdapter(Context context, int layout, List<MonAn> monAnList) {
         this.context = context;
@@ -75,9 +85,29 @@ public class MonAnAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 ItemGiohang.add(monAn.getiDMonAn());
-                Toast.makeText(context, ""+ItemGiohang, Toast.LENGTH_SHORT).show();
+                String TenMonAn = "";
+                String TenQuan = "";
+                String DiaChi = "";
+                int Gia = 0 ;
+                for(int i = 0 ; i < ItemGiohang.size(); i++){
+                    Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where Id = '"+ItemGiohang.get(i)+"'");
+                    while (cursor.moveToNext()){
+                        int id = cursor.getInt(0);
+                        TenMonAn = cursor.getString(1);
+                        TenQuan = cursor.getString(2);
+                        DiaChi = cursor.getString(3);
+                        Gia = cursor.getInt(5);
+                    }
+                    dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"')");
+                    ItemGiohang.clear();
+                }
             }
         });
         return view;
     }
+    private void initPreferences() {
+        sharedPreferences = context.getSharedPreferences("mylogin",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+    }
+
 }

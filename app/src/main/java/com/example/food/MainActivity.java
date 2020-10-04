@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import static com.example.food.MonAnActivity.dataBaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,12 +19,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btnMonAn = findViewById(R.id.btnMonAn);
+        dataBaseHelper = new DataBaseHelper(MainActivity.this,"CSDL1",null,1);
+        dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
+                "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer)");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnMonAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,TheLoaiMonActivity.class);
+                Intent intent = new Intent(MainActivity.this,MonAnActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button btnGioHang = findViewById(R.id.btnGioHang);
+        btnGioHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,GioHangActivity.class);
                 startActivity(intent);
             }
         });

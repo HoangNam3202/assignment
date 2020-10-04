@@ -6,4 +6,10 @@
         >
 
     </item>
+    <item
+        android:id="@+id/mnu_GioHang"
+        android:title="Giỏ Hàng"
+        >
+
+    </item>
 </menu>
