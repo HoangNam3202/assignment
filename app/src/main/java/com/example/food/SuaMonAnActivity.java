@@ -3,9 +3,7 @@ package com.example.food;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -14,8 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,46 +23,41 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-public class ThemMonAnActivity extends AppCompatActivity {
-    int REQUEST_PICK = 2;
-    int REQUEST_CODE = 1;
+import static com.example.food.MonAnActivity.dataBaseHelper;
+
+public class SuaMonAnActivity extends AppCompatActivity {
     ImageView imageView_MonAn;
-    String TenTinhThanh;
-    public static boolean check_NutSua = false;
+    int REQUEST_PICK = 1;
+    int REQUEST_CODE = 2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_them_mon_an);
-        final String[] country = {"","Hà Nội", "Hải Phòng", "Đà Nẵng", "Cần Thơ", "Đắk Lắk"};
-        MonAnActivity.dataBaseHelper = new DataBaseHelper(ThemMonAnActivity.this,"CSDL1",null,1);
-
-        Button btnDang = findViewById(R.id.btnDang);
+        setContentView(R.layout.activity_sua_mon_an);
+        Button btnSua = findViewById(R.id.btnSua);
         imageView_MonAn = findViewById(R.id.imageView_MonAn);
         final EditText edtTenMon = findViewById(R.id.edtTenSp);
         final EditText edtQuan = findViewById(R.id.edtTenQuan);
         final EditText edtDiaChiQuan = findViewById(R.id.edtDiaChiQuan);
         final EditText edtGia = findViewById(R.id.edtGia);
+        dataBaseHelper = new DataBaseHelper(SuaMonAnActivity.this,"CSDL1",null,1);
 
-        final Spinner spin = (Spinner) findViewById(R.id.spnTinhThanh);
+//        final Spinner spin = (Spinner) findViewById(R.id.spnTinhThanh);
+//        final String[] country = {"","Hà Nội", "Hải Phòng", "Đà Nẵng", "Cần Thơ", "Đắk Lắk"};
+//        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);
+//        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spin.setAdapter(aa);
 
-
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                 TenTinhThanh = spin.getSelectedItem().toString();
-                if(country[i].equals("")){
-                    spin.setBackgroundResource(R.drawable.bg_error);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,country);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(aa);
+        Intent intent = getIntent();
+        String TenCanSua = intent.getStringExtra("TenMonAnCanSua");
+        String TenQuanCanSua = intent.getStringExtra("TenQuanCanSua");
+        String DiaChiCanSua = intent.getStringExtra("DiaChiCanSua");
+        int GiaCanSua = intent.getIntExtra("GiaCanSua",0);
+        final int vitri = intent.getIntExtra("Vitri",0);
+        Toast.makeText(this, ""+vitri, Toast.LENGTH_SHORT).show();
+        edtTenMon.setText(TenCanSua);
+        edtQuan.setText(TenQuanCanSua);
+        edtDiaChiQuan.setText(DiaChiCanSua);
+        edtGia.setText(""+GiaCanSua);
 
         imageView_MonAn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,22 +67,21 @@ public class ThemMonAnActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_PICK);
             }
         });
-        btnDang.setOnClickListener(new View.OnClickListener() {
+        btnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Ten_Mon = edtTenMon.getText().toString();
-                String Ten_Quan = edtQuan.getText().toString();
-                String Dia_Chi = edtDiaChiQuan.getText().toString() +", "+ TenTinhThanh;
-                int Gia = Integer.parseInt(edtGia.getText().toString());
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView_MonAn.getDrawable();
                 Bitmap bitmap =  bitmapDrawable.getBitmap();
                 ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
                 byte[] anh = byteArray.toByteArray();
-                MonAnActivity.dataBaseHelper.INSERT_DOVAT(Ten_Mon,Ten_Quan,Dia_Chi,anh,Gia);
-                Toast.makeText(ThemMonAnActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ThemMonAnActivity.this,MonAnActivity.class);
-                startActivity(intent);
+//                dataBaseHelper.UpData("Update MonAn set TenMonAn = '"+edtTenMon.getText().toString()+"', " +
+//                        " TenQuan = '"+edtQuan.getText().toString()+"', DiaChi = '"+edtDiaChiQuan.getText().toString()+"',Hinh = '"+anh+"',Gia = '"+ Integer.parseInt(edtGia.getText().toString())+"'" +
+//                        " where Id = '"+vitri+"' ");
+                dataBaseHelper.Update_DOVAT(edtTenMon.getText().toString(),edtQuan.getText().toString(),
+                        edtDiaChiQuan.getText().toString(),anh,Integer.parseInt(edtGia.getText().toString()),vitri);
+                Intent intent1 = new Intent(SuaMonAnActivity.this,MonAnActivity.class);
+                startActivity(intent1);
                 finish();
             }
         });

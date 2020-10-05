@@ -33,6 +33,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         statement.executeInsert();
     }
+    public void Update_DOVAT(String TenMonAn,String TenQuan,String DiaChi,byte[] hinh,Integer Gia,Integer Id){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "Update MonAn set  TenMonAn = ?, TenQuan = ? , DiaChi = ? , Hinh = ?,Gia = ? where Id = ?" ;
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindDouble(6, (double)Id);
+        statement.bindString(1,TenMonAn);
+        statement.bindString(2,TenQuan);
+        statement.bindString(3,DiaChi);
+        statement.bindBlob(4,hinh);
+        statement.bindDouble(5, (double)Gia);
+
+        statement.executeInsert();
+    }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 

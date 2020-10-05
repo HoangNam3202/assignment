@@ -68,7 +68,7 @@ public class MonAnAdapter extends BaseAdapter {
         TextView tvTenQuan = view.findViewById(R.id.tvTenQuan);
         TextView tvDiaChi = view.findViewById(R.id.tvDiaChi);
         TextView tvGia = view.findViewById(R.id.tvGia);
-        Button btnDatMon = view.findViewById(R.id.btnDatHang);
+        TextView btnDatMon = view.findViewById(R.id.btnDatHang);
 
 
         final MonAn monAn = monAnList.get(i);
@@ -99,6 +99,7 @@ public class MonAnAdapter extends BaseAdapter {
                         Gia = cursor.getInt(5);
                     }
                     dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"')");
+                    Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
                     ItemGiohang.clear();
                 }
             }

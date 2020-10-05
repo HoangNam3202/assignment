@@ -18,20 +18,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.food.adapter.MonAnAdapter;
+import com.example.food.object.GIoHang;
 import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
 
+import static com.example.food.ThemMonAnActivity.check_NutSua;
+
 public class MonAnActivity extends AppCompatActivity {
     public static DataBaseHelper dataBaseHelper;
     public static ArrayList<MonAn> arr;
+    boolean check_list = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mon_an);
         ListView listView_MonAn = findViewById(R.id.listMonAn);
         arr = new ArrayList<>();
-        MonAnAdapter monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
+        final MonAnAdapter monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
         listView_MonAn.setAdapter(monAnAdapter);
 
         dataBaseHelper = new DataBaseHelper(MonAnActivity.this,"CSDL1",null,1);
@@ -40,7 +44,7 @@ public class MonAnActivity extends AppCompatActivity {
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer)");
 //        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
-//        dataBaseHelper.UpData("Insert into MonAn Values(null,'Com Hai San','Muoi Kho','82 Hung Vuong','"+R.drawable.comga+"',351)");
+//        dataBaseHelper.UpData("Insert into MonAn Values(null,'Cơm Gà','','82 Hùng Vương, phường Tự An, TP Buôn Ma Thuột, Đắk Lắk','"+R.drawable.comga+"',35)");
         Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
@@ -56,6 +60,55 @@ public class MonAnActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(MonAnActivity.this, ""+arr.get(i).TenMonAn, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MonAnActivity.this,SuaMonAnActivity.class);
+                intent.putExtra("TenMonAnCanSua",arr.get(i).TenMonAn);
+                intent.putExtra("TenQuanCanSua",arr.get(i).TenQuan);
+                intent.putExtra("DiaChiCanSua",arr.get(i).DiaChi);
+                intent.putExtra("HinhCanSua",arr.get(i).HinhAnh);
+                intent.putExtra("GiaCanSua",arr.get(i).Gia);
+                intent.putExtra("Vitri",arr.get(i).iDMonAn);
+                if (!check_list) {
+                    startActivity(intent);
+                }
+            }
+        });
+        listView_MonAn.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                check_list = true;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MonAnActivity.this);
+                builder.setTitle("Xoá đơn hàng");
+                builder.setMessage("Bạn có thực sự muốn xoá "+arr.get(i).TenMonAn+"?");
+                final int vitri1 = i;
+                builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataBaseHelper.UpData("Delete from MonAn where Id = '"+arr.get(vitri1).iDMonAn+"'");
+                        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
+                        arr.clear();
+                        while (cursor.moveToNext()){
+                            int id = cursor.getInt(0);
+                            String TenMonAn = cursor.getString(1);
+                            String TenQuan = cursor.getString(2);
+                            String DiaChi = cursor.getString(3);
+                            byte[] Hinh = cursor.getBlob(4);
+                            int Gia = cursor.getInt(5);
+
+                            arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+                        }
+                        monAnAdapter.notifyDataSetChanged();
+                        check_list = false;
+                    }
+                });
+                builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        check_list = false;
+                    }
+                });
+
+                builder.create().show();
+                return false;
             }
         });
     }
