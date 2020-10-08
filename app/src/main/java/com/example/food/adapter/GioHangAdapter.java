@@ -84,7 +84,7 @@ public class GioHangAdapter extends BaseAdapter {
         tvGia.setText(""+GioHang.getGia());
 //        tvSoLuong.setText(""+GioHang.getSoLuong());
         final EditText edtSoLuong = view.findViewById(R.id.edtSoLuong);
-        edtSoLuong.setText(""+GioHang.getSoLuong());
+        edtSoLuong.setText("0"+GioHang.getSoLuong());
         edtSoLuong.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -93,6 +93,14 @@ public class GioHangAdapter extends BaseAdapter {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+//                Toast.makeText(context, ""+xyz, Toast.LENGTH_SHORT).show();
+//                tvGia.setText(""+xyz);
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
                 int abc = GioHang.getSoLuong();
                 int xyz = GioHang.getGia();
                 abc = Integer.parseInt(edtSoLuong.getText().toString());
@@ -109,14 +117,6 @@ public class GioHangAdapter extends BaseAdapter {
                     }
                     gioHangAdapter.notifyDataSetChanged();
                 }
-
-//                Toast.makeText(context, ""+xyz, Toast.LENGTH_SHORT).show();
-//                tvGia.setText(""+xyz);
-
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-
             }
         });
         return view;
