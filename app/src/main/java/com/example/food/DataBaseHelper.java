@@ -1,5 +1,6 @@
 package com.example.food;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +10,7 @@ import android.database.sqlite.SQLiteStatement;
 import androidx.annotation.Nullable;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
+    public static final String TABLE_NAME = "register.db";
     public DataBaseHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -51,9 +53,44 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
     }
+    public void QueryData(String sql) {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL(sql);
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL(" DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(sqLiteDatabase);
+    }
+    public long addUser(String user, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("User", user);
+        contentValues.put("Pass", password);
+        long res = db.insert("DangNhap", null, contentValues);
+        db.close();
+        return res;
+    }
+    public boolean check(String name) {
 
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from DangNhap where User=?", new String[]{name});
+        int count = cursor.getCount();
+        cursor.close();
+        db.close();
+        if (count > 0) return true;
+        else return false;
+    }
+
+    public boolean checkUser(String name, String pass) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("select * from DangNhap where User=? and Pass=?", new String[]{name, pass});
+
+        if (cursor.getCount() > 0) return true;
+        else return false;
     }
 }

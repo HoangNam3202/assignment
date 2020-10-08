@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/hinhnen"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <EditText
+        android:background="@drawable/bg_item"
+        android:id="@+id/edittext_username"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="250dp"
+        android:drawableRight="@drawable/usser"
+        android:gravity="center"
+        android:hint="Username"
+        android:paddingLeft="2dp"
+        android:textSize="20dp"
+        android:padding="10dp"
+
+
+
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:hintEnabled="false"
+        app:passwordToggleEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edittext_password"
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_item"
+            android:gravity="center"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:paddingLeft="2dp"
+            android:textSize="20dp"
+            android:padding="10dp"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/botton_login"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Đăng nhập"
+        android:background="@drawable/bg_item"
+        ></Button>
+
+    <CheckBox
+        android:layout_marginTop="20dp"
+        android:id="@+id/checkboxRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nhodangnhap"
+        android:textColor="#fff"
+        android:textSize="15dp"></CheckBox>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:text="@string/chuacotaikhoan"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/textview_register"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/dangki"
+            android:textColor="#04ea00"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>
