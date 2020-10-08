@@ -2,17 +2,22 @@ package com.example.food.adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.food.GioHangActivity;
 import com.example.food.R;
 import com.example.food.object.GIoHang;
 import com.example.food.object.MonAn;
@@ -21,6 +26,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.food.GioHangActivity.Tong;
+import static com.example.food.GioHangActivity.gIoHangArrayList;
+import static com.example.food.GioHangActivity.gioHangAdapter;
+import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class GioHangAdapter extends BaseAdapter {
     public Context context;
@@ -29,7 +38,7 @@ public class GioHangAdapter extends BaseAdapter {
     public static ArrayList<Integer> ItemGiohang = new ArrayList();
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-
+    public static EditText edtSoLuong;
     public GioHangAdapter(Context context, int layout, List<GIoHang> gIoHangList) {
         this.context = context;
         this.layout = layout;
@@ -60,9 +69,9 @@ public class GioHangAdapter extends BaseAdapter {
         TextView tvTenMonAn = view.findViewById(R.id.tvTenMon);
         TextView tvTenQuan = view.findViewById(R.id.tvTenQuan);
         TextView tvDiaChi = view.findViewById(R.id.tvDiaChi);
-        TextView tvGia = view.findViewById(R.id.tvGia);
+        final TextView tvGia = view.findViewById(R.id.tvGia);
+//        final TextView tvSoLuong = view.findViewById(R.id.tvSoLuong);
 //        Button btnDatMon = view.findViewById(R.id.btnDatHang);
-
 
         final GIoHang GioHang = gIoHangList.get(i);
 
@@ -73,13 +82,46 @@ public class GioHangAdapter extends BaseAdapter {
         tvTenQuan.setText(GioHang.getTenQuan());
         tvDiaChi.setText(GioHang.getDiaChi());
         tvGia.setText(""+GioHang.getGia());
+//        tvSoLuong.setText(""+GioHang.getSoLuong());
+        final EditText edtSoLuong = view.findViewById(R.id.edtSoLuong);
+        edtSoLuong.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int abc = GioHang.getSoLuong();
+                int xyz = GioHang.getGia();
+                abc = Integer.parseInt(edtSoLuong.getText().toString());
+                if (abc != 0) {
+                    xyz *= Integer.parseInt(edtSoLuong.getText().toString());
+                    dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where Id = '"+GioHang.getiDMonAn()+"'");
+                    Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
+                    gIoHangArrayList.clear();
+                    Tong = 0;
+                    while (cursor.moveToNext()){
+                        gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
+                                cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
+                        Tong += cursor.getInt(5) * cursor.getInt(6);
+                    }
+                    gioHangAdapter.notifyDataSetChanged();
+                }
+
+//                Toast.makeText(context, ""+xyz, Toast.LENGTH_SHORT).show();
+//                tvGia.setText(""+xyz);
+
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         return view;
     }
     private void initPreferences() {
         sharedPreferences = context.getSharedPreferences("mylogin",MODE_PRIVATE);
         editor = sharedPreferences.edit();
     }
-
 }

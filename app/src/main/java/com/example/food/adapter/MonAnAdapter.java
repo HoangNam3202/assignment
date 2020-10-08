@@ -98,7 +98,7 @@ public class MonAnAdapter extends BaseAdapter {
                         DiaChi = cursor.getString(3);
                         Gia = cursor.getInt(5);
                     }
-                    dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"')");
+                    dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"',1)");
                     Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
                     ItemGiohang.clear();
                 }

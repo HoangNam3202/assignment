@@ -7,14 +7,16 @@ public class GIoHang {
     public String DiaChi;
     public String Email;
     public int Gia;
+    public int SoLuong;
 
-    public GIoHang(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, String email, int gia) {
+    public GIoHang(int iDMonAn, String tenMonAn, String tenQuan, String diaChi, String email, int gia, int soLuong) {
         this.iDMonAn = iDMonAn;
         TenMonAn = tenMonAn;
         TenQuan = tenQuan;
         DiaChi = diaChi;
         Email = email;
         Gia = gia;
+        SoLuong = soLuong;
     }
 
     public int getiDMonAn() {
@@ -63,5 +65,13 @@ public class GIoHang {
 
     public void setGia(int gia) {
         Gia = gia;
+    }
+
+    public int getSoLuong() {
+        return SoLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        SoLuong = soLuong;
     }
 }

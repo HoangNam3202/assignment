@@ -37,7 +37,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_mon_an);
-        final String[] country = {"","Hà Nội", "Hải Phòng", "Đà Nẵng", "Cần Thơ", "Đắk Lắk"};
+        final String[] country = {"Hà Nội", "Hải Phòng", "Đà Nẵng", "Cần Thơ", "Đắk Lắk"};
         MonAnActivity.dataBaseHelper = new DataBaseHelper(ThemMonAnActivity.this,"CSDL1",null,1);
 
         Button btnDang = findViewById(R.id.btnDang);
