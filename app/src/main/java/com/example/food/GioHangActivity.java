@@ -51,7 +51,7 @@ public class GioHangActivity extends AppCompatActivity {
         final Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
         while (cursor.moveToNext()){
             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
-                    cursor.getString(3),cursor.getString(4),cursor.getInt(5),1));
+                    cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
             Tong += cursor.getInt(5);
         }
         listView_GioHang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -70,7 +70,7 @@ public class GioHangActivity extends AppCompatActivity {
                         Tong = 0;
                         while (cursor.moveToNext()){
                             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
-                                    cursor.getString(3),cursor.getString(4),cursor.getInt(5),1));
+                                    cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
                             Tong += cursor.getInt(5);
                         }
                         gioHangAdapter.notifyDataSetChanged();

@@ -84,6 +84,7 @@ public class GioHangAdapter extends BaseAdapter {
         tvGia.setText(""+GioHang.getGia());
 //        tvSoLuong.setText(""+GioHang.getSoLuong());
         final EditText edtSoLuong = view.findViewById(R.id.edtSoLuong);
+        edtSoLuong.setText(""+GioHang.getSoLuong());
         edtSoLuong.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

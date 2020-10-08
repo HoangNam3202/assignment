@@ -34,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         mTextViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent LoginIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent LoginIntent = new Intent(RegisterActivity.this, MainDangNhap.class);
                 startActivity(LoginIntent);
             }
         });
@@ -59,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                         if (val > 0) {
                             Toast.makeText(RegisterActivity.this, "Bạn đã đăng kí", Toast.LENGTH_SHORT).show();
-                            Intent moveToLogin = new Intent(RegisterActivity.this, MainActivity.class);
+                            Intent moveToLogin = new Intent(RegisterActivity.this, MainDangNhap.class);
                             startActivity(moveToLogin);
                         } else {
                             Toast.makeText(RegisterActivity.this, "Đăng kí thất bại", Toast.LENGTH_SHORT).show();
