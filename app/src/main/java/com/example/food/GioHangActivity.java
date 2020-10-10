@@ -26,6 +26,9 @@ import com.example.food.object.GIoHang;
 import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 import static com.example.food.MonAnActivity.dataBaseHelper;
 import static com.example.food.adapter.GioHangAdapter.edtSoLuong;
@@ -52,7 +55,7 @@ public class GioHangActivity extends AppCompatActivity {
         while (cursor.moveToNext()){
             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
                     cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
-            Tong += cursor.getInt(5);
+            Tong += cursor.getInt(5) * cursor.getInt(6);
         }
         listView_GioHang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -71,7 +74,7 @@ public class GioHangActivity extends AppCompatActivity {
                         while (cursor.moveToNext()){
                             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
                                     cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
-                            Tong += cursor.getInt(5);
+                            Tong += cursor.getInt(5) * cursor.getInt(6);
                         }
                         gioHangAdapter.notifyDataSetChanged();
                     }
@@ -92,12 +95,38 @@ public class GioHangActivity extends AppCompatActivity {
                 tvTongTien.setText(""+Tong+" $");
             }
         });
+        if (cursor.getCount() > 0) {
+            btnThanhToan.setEnabled(true);
+        }
+        else {
+            btnThanhToan.setEnabled(false);
+        }
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GioHangActivity.this,HoaDonActivity.class);
-                dataBaseHelper.UpData("Delete from GioHang");
+                final int random = new Random().nextInt(1000000000);
+                Calendar c = Calendar.getInstance();
+                Date date = c.getTime();
+//                Toast.makeText(GioHangActivity.this, ""+date, Toast.LENGTH_SHORT).show();
+//                dataBaseHelper.UpData("drop table HoaDon");
+//                dataBaseHelper.UpData("drop table ChiTietHD");
+                dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS ChiTietHD(MaHoaDon Integer ," +
+                        "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer,ThoiGian char(30))");
+                dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS HoaDon(MaHoaDon Integer ," +
+                        "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
+                dataBaseHelper.UpData("Insert into HoaDon values('"+random+"','hoangnam1101@gmail.com','"+Tong+"','"+date+"')");
+                for(int i =0 ; i < gIoHangArrayList.size(); i++){
+                    dataBaseHelper.UpData("Insert into ChiTietHD values('"+random+"','"+gIoHangArrayList.get(i).getTenMonAn()+"'," +
+                            "'"+gIoHangArrayList.get(i).getTenQuan()+"','"+gIoHangArrayList.get(i).getDiaChi()+"'," +
+                            "'hoangnam1101@gmail.com','"+gIoHangArrayList.get(i).getGia()+"','"+gIoHangArrayList.get(i).getSoLuong()+"','"+date+"')");
+                }
+//                    Cursor contro = dataBaseHelper.GetData("Select *from HoaDon");
+//                    while (contro.moveToNext()){
+//                        Toast.makeText(GioHangActivity.this, ""+contro.getString(3), Toast.LENGTH_SHORT).show();
+//                    }
                 tvTongTien.setText("0"+" $");
+                dataBaseHelper.UpData("Delete from GioHang");
                 startActivity(intent);
             }
         });

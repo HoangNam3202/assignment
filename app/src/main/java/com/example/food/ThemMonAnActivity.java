@@ -33,6 +33,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
     ImageView imageView_MonAn;
     String TenTinhThanh;
     public static boolean check_NutSua = false;
+    boolean check_Hinh = false ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +55,6 @@ public class ThemMonAnActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                  TenTinhThanh = spin.getSelectedItem().toString();
-                if(country[i].equals("")){
-                    spin.setBackgroundResource(R.drawable.bg_error);
-                }
             }
 
             @Override
@@ -82,17 +80,43 @@ public class ThemMonAnActivity extends AppCompatActivity {
                 String Ten_Mon = edtTenMon.getText().toString();
                 String Ten_Quan = edtQuan.getText().toString();
                 String Dia_Chi = edtDiaChiQuan.getText().toString() +", "+ TenTinhThanh;
-                int Gia = Integer.parseInt(edtGia.getText().toString());
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) imageView_MonAn.getDrawable();
                 Bitmap bitmap =  bitmapDrawable.getBitmap();
                 ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArray);
                 byte[] anh = byteArray.toByteArray();
-                MonAnActivity.dataBaseHelper.INSERT_DOVAT(Ten_Mon,Ten_Quan,Dia_Chi,anh,Gia);
-                Toast.makeText(ThemMonAnActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(ThemMonAnActivity.this,MonAnActivity.class);
-                startActivity(intent);
-                finish();
+                if (!Ten_Mon.equals("")) {
+                    if (!Ten_Quan.equals("")) {
+                        if (!edtDiaChiQuan.getText().toString().equals("")) {
+                            if (edtGia.getText().toString() != "") {
+                                int Gia = Integer.parseInt(edtGia.getText().toString());
+                                if(check_Hinh){
+                                    MonAnActivity.dataBaseHelper.INSERT_DOVAT(Ten_Mon,Ten_Quan,Dia_Chi,anh,Gia);
+                                    Toast.makeText(ThemMonAnActivity.this, "Đăng thành công", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ThemMonAnActivity.this,MonAnActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                else {
+                                    imageView_MonAn.setBackgroundResource(R.drawable.bg_error);
+                                }
+                            }
+                            else {
+                                edtGia.setError("Ch dien");
+                            }
+                        }
+                        else {
+                            edtDiaChiQuan.setError("Ch dien");
+                        }
+                    }
+                    else {
+                        edtQuan.setError("Ch dien");
+                    }
+                }
+                else {
+                    edtTenMon.setError("Ch dien");
+                }
+
             }
         });
     }
@@ -108,6 +132,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            check_Hinh = true;
             imageView_MonAn.setImageBitmap(bitmap);
         }
         if (requestCode == REQUEST_PICK && resultCode == RESULT_OK && data != null) {
@@ -116,6 +141,7 @@ public class ThemMonAnActivity extends AppCompatActivity {
                 InputStream inputStream =getContentResolver().openInputStream(uri);
                 Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                 imageView_MonAn.setImageBitmap(bitmap);
+                check_Hinh = true;
                 imageView_MonAn.setScaleType(ImageView.ScaleType.CENTER_CROP);
 
             } catch (FileNotFoundException e) {

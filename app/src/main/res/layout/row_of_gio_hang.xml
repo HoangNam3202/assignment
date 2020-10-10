@@ -8,7 +8,9 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_item">
+        android:background="@drawable/bg_item"
+        android:descendantFocusability="afterDescendants"
+        >
         <TextView
             android:id="@+id/tvTenMon"
             android:layout_width="wrap_content"
