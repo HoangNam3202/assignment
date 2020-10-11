@@ -4,48 +4,61 @@
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="130dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/bg_item"
         android:descendantFocusability="afterDescendants"
         >
-
         <TextView
-            android:id="@+id/tvMaHoaDon"
+            android:id="@+id/tvTenMon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/card_view"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="29dp"
-            android:layout_marginLeft="29dp"
-            android:layout_marginTop="20dp"
-            android:text="123456789"
-            android:textColor="#000"
+            android:layout_marginStart="23dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="21dp"
+            android:text="Ten Mon'"
+            android:textColor="#ff00"
             android:textSize="16dp" />
 
         <TextView
-            android:id="@+id/tvThoiGian"
+            android:id="@+id/tvTenQuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/card_view"
+            android:layout_below="@+id/tvTenMon"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginStart="29dp"
-            android:layout_marginLeft="29dp"
-            android:layout_marginTop="45dp"
-            android:text="8 th 9 2020 gi gi do"
+            android:layout_marginStart="23dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="12dp"
+            android:text="Ten Quan'"
             android:textColor="#000"
-            android:textSize="16dp" />
+            android:textSize="12dp" />
 
         <TextView
-            android:id="@+id/tvGia_HoaDon"
+            android:id="@+id/tvDiaChi"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTenMon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="23dp"
+            android:layout_marginLeft="23dp"
+            android:layout_marginTop="41dp"
+            android:text="Dia Chi'"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/tvGia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
             android:layout_toStartOf="@+id/tvDonVi"
@@ -61,12 +74,26 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             android:text="$"
             android:textColor="#FFC107"
             android:textSize="22dp" />
 
+        <TextView
+            android:id="@+id/edtSoLuong"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="21dp"
+            android:layout_marginRight="21dp"
+            android:layout_marginBottom="21dp"
+            android:inputType="number"
+            android:gravity="center"
+            android:text="0"
+             />
     </RelativeLayout>
 </RelativeLayout>

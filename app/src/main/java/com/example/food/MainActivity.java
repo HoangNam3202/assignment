@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.food.object.HoaDon;
+
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,GioHangActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button btnHoaDon = findViewById(R.id.btnHoaDon);
+        btnHoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, HoaDonActivity.class);
                 startActivity(intent);
             }
         });

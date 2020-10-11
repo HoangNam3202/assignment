@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChiTietHDActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHI TIẾT HÓA ĐƠN"
+        android:textSize="25dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:id="@+id/tvMaHoaDon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mã hóa đơn : "
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:id="@+id/tvNgayDat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ngày đặt : "
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        />
+    <ListView
+        android:id="@+id/list_ChiTietHD"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>

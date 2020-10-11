@@ -46,11 +46,13 @@ public class HoaDonAdapter extends BaseAdapter {
 
         TextView tvThoiGian = view.findViewById(R.id.tvThoiGian);
         TextView tvGia_HoaDon = view.findViewById(R.id.tvGia_HoaDon);
+        TextView tvMaHoaDon = view.findViewById(R.id.tvMaHoaDon);
 
         HoaDon hoaDon = hoaDonList.get(i);
 
         tvThoiGian.setText(""+hoaDon.getThoiGian());
         tvGia_HoaDon.setText(""+hoaDon.getTongTien());
+        tvMaHoaDon.setText("Mã hóa đơn : "+hoaDon.getMaHoaDon());
 
 
         return view;
