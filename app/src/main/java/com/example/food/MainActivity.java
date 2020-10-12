@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer)");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Cursor cursor = dataBaseHelper.GetData("Select * from DangNhap");
+        if(cursor.getCount() >0){
+            Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show();
+        }
         btnMonAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

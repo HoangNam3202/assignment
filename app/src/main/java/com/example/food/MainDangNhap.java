@@ -25,7 +25,7 @@ public class MainDangNhap extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap);
-        db = new DataBaseHelper(this,"dangnhap.sqlite",null,1);
+        db = new DataBaseHelper(this,"CSDL1",null,1);
         db.QueryData("CREATE TABLE IF NOT EXISTS DangNhap (Id INTEGER PRIMARY KEY AUTOINCREMENT, User VARCHAR(200), Pass VARCHAR(200))");
 
         mTextUsername =(EditText)findViewById(R.id.edittext_username);

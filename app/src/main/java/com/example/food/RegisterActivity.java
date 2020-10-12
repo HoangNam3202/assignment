@@ -25,7 +25,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangki);
         final String name = "[a-zA-Z._\\d]+$";
-        db = new DataBaseHelper(this, "dangnhap.sqlite", null, 1);
+        db = new DataBaseHelper(this, "CSDL1", null, 1);
         mTextUsername = (EditText) findViewById(R.id.edittext_username);
         mTextPassword = (EditText) findViewById(R.id.edittext_password);
         mTextCnfPassword = (EditText) findViewById(R.id.edittext_cnf_password);
