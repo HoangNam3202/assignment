@@ -12,43 +12,45 @@
 
 
     <EditText
-        android:layout_marginTop="250dp"
-        android:background="@drawable/bg_item"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/bg_dndk"
         android:id="@+id/edittext_username"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:hint="@string/username"
         android:drawableLeft="@drawable/usser"
-
+        android:padding="10dp"
         android:textSize="20dp"
         android:gravity="center"
         android:paddingLeft="2dp"
         />
     <EditText
         android:id="@+id/edittext_password"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:hint="@string/password"
-        android:background="@drawable/bg_item"
+        android:background="@drawable/bg_dndk"
         android:textSize="20dp"
         android:inputType="textPassword"
         android:layout_marginTop="30dp"
+        android:padding="10dp"
         android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
         android:gravity="center"
         android:paddingLeft="2dp"
         />
     <EditText
         android:id="@+id/edittext_cnf_password"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:hint="@string/confirm_password"
-        android:background="@drawable/bg_item"
+        android:background="@drawable/bg_dndk"
         android:textSize="20dp"
         android:layout_marginTop="30dp"
         android:drawableLeft="@drawable/ic_baseline_vpn_key_24"
         android:gravity="center"
         android:paddingLeft="2dp"
         android:inputType="textPassword"
+        android:padding="10dp"
         />
     <Button
         android:id="@+id/button_register"

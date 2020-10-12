@@ -9,10 +9,10 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
     <EditText
-        android:background="@drawable/bg_item"
+        android:background="@drawable/bg_dndk"
         android:id="@+id/edittext_username"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:layout_marginTop="250dp"
         android:drawableRight="@drawable/usser"
         android:gravity="center"
@@ -34,8 +34,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittext_password"
             android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_item"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_dndk"
             android:gravity="center"
             android:hint="@string/password"
             android:inputType="textPassword"
