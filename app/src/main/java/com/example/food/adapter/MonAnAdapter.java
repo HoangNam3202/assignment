@@ -20,12 +20,16 @@ import androidx.annotation.NonNull;
 
 import com.example.food.R;
 import com.example.food.ServiceGioHang;
+import com.example.food.object.GIoHang;
 import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.food.GioHangActivity.Tong;
+import static com.example.food.GioHangActivity.gIoHangArrayList;
+import static com.example.food.GioHangActivity.gioHangAdapter;
 import static com.example.food.MonAnActivity.arr;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
@@ -98,7 +102,18 @@ public class MonAnAdapter extends BaseAdapter {
                         DiaChi = cursor.getString(3);
                         Gia = cursor.getInt(5);
                     }
-                    dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"',1)");
+                    Cursor contro = dataBaseHelper.GetData("Select * from GioHang where TenMonAn = '"+monAn.getTenMonAn()+"'");
+                    if(contro.getCount() > 0 ){
+                        int abc = 0;
+                        while (contro.moveToNext()){
+                            abc = contro.getInt(6);
+                        }
+                        abc++;
+                        dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where TenMonAn = '"+monAn.getTenMonAn()+"'");
+                    }
+                    else {
+                        dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"',1)");
+                    }
                     Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
                     ItemGiohang.clear();
                 }

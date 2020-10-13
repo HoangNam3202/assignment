@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,6 +41,7 @@ public class GioHangAdapter extends BaseAdapter {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     public static EditText edtSoLuong;
+    public static ArrayList<Integer> MangCanXoa = new ArrayList();
     public GioHangAdapter(Context context, int layout, List<GIoHang> gIoHangList) {
         this.context = context;
         this.layout = layout;
@@ -116,6 +119,19 @@ public class GioHangAdapter extends BaseAdapter {
                         Tong += cursor.getInt(5) * cursor.getInt(6);
                     }
                     gioHangAdapter.notifyDataSetChanged();
+                }
+            }
+        });
+        final CheckBox checkBox = view.findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (checkBox.isChecked()) {
+                    MangCanXoa.add(GioHang.getiDMonAn());
+                }
+                else {
+                    MangCanXoa.remove(new Integer(String.valueOf(GioHang.getiDMonAn())));
+//                    abc.clear();
                 }
             }
         });

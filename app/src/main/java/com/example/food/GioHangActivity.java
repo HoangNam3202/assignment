@@ -11,10 +11,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ import java.util.Date;
 import java.util.Random;
 
 import static com.example.food.MonAnActivity.dataBaseHelper;
+import static com.example.food.adapter.GioHangAdapter.MangCanXoa;
 import static com.example.food.adapter.GioHangAdapter.edtSoLuong;
 import static com.example.food.adapter.MonAnAdapter.ItemGiohang;
 
@@ -51,6 +54,7 @@ public class GioHangActivity extends AppCompatActivity {
         listView_GioHang.setAdapter(gioHangAdapter);
 
         Button btnThanhToan = findViewById(R.id.btnThanhToan);
+        Tong = 0;
         final Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
         while (cursor.moveToNext()){
             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
@@ -126,11 +130,53 @@ public class GioHangActivity extends AppCompatActivity {
 //                        Toast.makeText(GioHangActivity.this, ""+contro.getString(3), Toast.LENGTH_SHORT).show();
 //                    }
                 tvTongTien.setText("0"+" $");
+                Tong = 0;
                 dataBaseHelper.UpData("Delete from GioHang");
                 startActivity(intent);
+                finish();
             }
         });
+        TextView tvXoaItem = findViewById(R.id.tvXoaItem);
+        tvXoaItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MangCanXoa.size() <= 0) {
+                    View inflatedView = getLayoutInflater().inflate(R.layout.row_of_gio_hang, null);
+                    CheckBox checkBox = (CheckBox)inflatedView.findViewById(R.id.checkBox);
+                    checkBox.setVisibility(View.VISIBLE);
+                }
+                else {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(GioHangActivity.this);
+                    builder.setTitle("Xoá đơn hàng");
+                    builder.setMessage("Bạn có thực sự muốn xoá ?");
+                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            for (int i=0; i < MangCanXoa.size();i++){
+                                dataBaseHelper.UpData("delete from GioHang where Id = '"+MangCanXoa.get(i)+"'");
+                            }
+                            Tong = 0;
+                            Cursor cursor = dataBaseHelper.GetData("select * from GioHang");
+                            gIoHangArrayList.clear();
+                            while (cursor.moveToNext()){
+                                gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
+                                        cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
+                                Tong += cursor.getInt(5) * cursor.getInt(6);
+                            }
+                            gioHangAdapter.notifyDataSetChanged();
+                            MangCanXoa.clear();
+                        }
+                    });
+                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    });
+                    builder.create().show();
 
+                }
+            }
+        });
     }
 
 }

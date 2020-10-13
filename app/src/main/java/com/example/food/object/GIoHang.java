@@ -19,7 +19,7 @@ public class GIoHang {
         SoLuong = soLuong;
     }
 
-    public int getiDMonAn() {
+    public Integer getiDMonAn() {
         return iDMonAn;
     }
 
