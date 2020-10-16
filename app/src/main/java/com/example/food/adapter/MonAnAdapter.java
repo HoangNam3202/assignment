@@ -30,6 +30,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.food.GioHangActivity.Tong;
 import static com.example.food.GioHangActivity.gIoHangArrayList;
 import static com.example.food.GioHangActivity.gioHangAdapter;
+import static com.example.food.MainActivity.Email;
 import static com.example.food.MonAnActivity.arr;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
@@ -85,6 +86,7 @@ public class MonAnAdapter extends BaseAdapter {
         tvDiaChi.setText(monAn.getDiaChi());
         tvGia.setText(""+monAn.getGia());
 
+
         btnDatMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,7 +104,7 @@ public class MonAnAdapter extends BaseAdapter {
                         DiaChi = cursor.getString(3);
                         Gia = cursor.getInt(5);
                     }
-                    Cursor contro = dataBaseHelper.GetData("Select * from GioHang where TenMonAn = '"+monAn.getTenMonAn()+"'");
+                    Cursor contro = dataBaseHelper.GetData("Select * from GioHang where TenMonAn = '"+monAn.getTenMonAn()+"' and EmailnNguoiDung = '"+Email+"'");
                     if(contro.getCount() > 0 ){
                         int abc = 0;
                         while (contro.moveToNext()){
@@ -112,7 +114,7 @@ public class MonAnAdapter extends BaseAdapter {
                         dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where TenMonAn = '"+monAn.getTenMonAn()+"'");
                     }
                     else {
-                        dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','hoangnam1101@gmail.com','"+Gia+"',1)");
+                        dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','"+Email+"','"+Gia+"',1)");
                     }
                     Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
                     ItemGiohang.clear();

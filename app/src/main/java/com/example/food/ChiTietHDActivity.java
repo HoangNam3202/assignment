@@ -15,6 +15,7 @@ import com.example.food.object.ChiTietHD;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.food.MainActivity.Email;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class ChiTietHDActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class ChiTietHDActivity extends AppCompatActivity {
         Intent intent = getIntent();
         int MaHoaDon_ChiTiet = intent.getIntExtra("IDhoaDon",0);
         String ThoiGian = intent.getStringExtra("ThoiGian");
-        Toast.makeText(this, ""+MaHoaDon_ChiTiet, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+MaHoaDon_ChiTiet, Toast.LENGTH_SHORT).show();
         ArrayList<ChiTietHD> chiTietHDArrayList = new ArrayList<>();
         ChiTietHDAdapter chiTietHDAdapter = new ChiTietHDAdapter(ChiTietHDActivity.this,R.layout.row_of_chi_tiet_hoa_don,chiTietHDArrayList);
         ListView lv_ChiTiet = findViewById(R.id.list_ChiTietHD);
@@ -37,7 +38,7 @@ public class ChiTietHDActivity extends AppCompatActivity {
         tvMaHoaDon.setText("Mã hóa đơn : "+MaHoaDon_ChiTiet);
         tvNgayDat.setText("Ngày đặt : "+ThoiGian);
 
-        Cursor cursor = dataBaseHelper.GetData("Select * from ChiTietHD where MaHoaDon = '"+MaHoaDon_ChiTiet+"'");
+        Cursor cursor = dataBaseHelper.GetData("Select * from ChiTietHD where MaHoaDon = '"+MaHoaDon_ChiTiet+"' and EmailnNguoiDung = '"+Email+"'");
         while (cursor.moveToNext()) {
             chiTietHDArrayList.add(new ChiTietHD(cursor.getInt(0),cursor.getInt(5),cursor.getInt(6),
                     cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(7)));

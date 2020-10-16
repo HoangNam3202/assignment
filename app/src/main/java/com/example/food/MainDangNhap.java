@@ -2,6 +2,7 @@ package com.example.food;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,8 +27,11 @@ public class MainDangNhap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dangnhap);
         db = new DataBaseHelper(this,"CSDL1",null,1);
-        db.QueryData("CREATE TABLE IF NOT EXISTS DangNhap (Id INTEGER PRIMARY KEY AUTOINCREMENT, User VARCHAR(200), Pass VARCHAR(200))");
+//        db.QueryData("CREATE TABLE IF NOT EXISTS DangNhap (Id INTEGER PRIMARY KEY AUTOINCREMENT, User VARCHAR(200), Pass VARCHAR(200))");
+        mySharedPreferences =getSharedPreferences("dataLogin", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = mySharedPreferences.edit();
 
+        cbRemember = (CheckBox)findViewById(R.id.checkboxRemember);
         mTextUsername =(EditText)findViewById(R.id.edittext_username);
         mTextPassword =(EditText)findViewById(R.id.edittext_password);
         mButtonLogin =(Button) findViewById(R.id.botton_login);
@@ -39,9 +43,12 @@ public class MainDangNhap extends AppCompatActivity {
                 startActivity(registerIntent);
             }
         });
-
-        AnhXa();
-        mySharedPreferences =getSharedPreferences("dataLogin", MODE_PRIVATE);
+        String Mail_DangNhap = mySharedPreferences.getString("taikhoan","");
+        String Pass_DangNhap = mySharedPreferences.getString("matkhau","");
+        if (!Mail_DangNhap.equals("") && !Pass_DangNhap.equals("")) {
+            Intent intent = new Intent(MainDangNhap.this,MainActivity.class);
+            startActivity(intent);
+        }
 
         mTextUsername.setText(mySharedPreferences.getString("taikhoan" ,""));
         mTextPassword.setText(mySharedPreferences.getString("matkhau",""));
@@ -51,17 +58,20 @@ public class MainDangNhap extends AppCompatActivity {
             public void onClick(View view) {
                 String user = mTextUsername.getText().toString().trim();
                 String pwd = mTextPassword.getText().toString().trim();
-                Boolean res = db.checkUser(user,pwd);
-                if (res == true){
+                Cursor cursor = db.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
+                if (cursor.getCount() > 0){
                     if (cbRemember.isChecked()){
-                        SharedPreferences.Editor editor = mySharedPreferences.edit();
                         editor.putString("taikhoan", user);
                         editor.putString("matkhau", pwd);
+                        while (cursor.moveToNext()) {
+                            editor.putString("TenNguoiDung", cursor.getString(1));
+                            editor.putString("DiaChi", cursor.getString(3));
+                            editor.putString("TinhThanh", cursor.getString(4));
+                        }
                         editor.putBoolean("checked", true);
                         editor.commit();
                     }
                     else {
-                        SharedPreferences.Editor editor = mySharedPreferences.edit();
                         editor.remove("taikhoan");
                         editor.remove("matkhau");
                         editor.putBoolean("checked", false);
@@ -69,14 +79,13 @@ public class MainDangNhap extends AppCompatActivity {
                     }
                     Intent Homepage = new Intent(MainDangNhap.this, MainActivity.class);
                     startActivity(Homepage);
+                    finish();
                 }else{
-                    Toast.makeText(MainDangNhap.this, "Đăng nhập thất bại ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainDangNhap.this, "Email hoặc mật khẩu không chính xác",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
-    private void AnhXa(){
-        cbRemember = (CheckBox)findViewById(R.id.checkboxRemember);
-    }
+
 
 }

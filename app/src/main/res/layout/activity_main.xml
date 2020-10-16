@@ -30,6 +30,7 @@
             android:text="Name" />
 
         <TextView
+            android:id="@+id/tvAddress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTenNguoiDung"
@@ -48,12 +49,12 @@
             android:layout_height="65dp"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="17dp"
-            card_view:cardCornerRadius="50dp">
+            card_view:cardCornerRadius="30dp">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/customer" />
+            android:background="@drawable/hinhnen" />
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <LinearLayout
@@ -124,6 +125,7 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/btnCaiDat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

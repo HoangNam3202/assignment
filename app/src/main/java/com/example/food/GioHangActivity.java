@@ -54,8 +54,11 @@ public class GioHangActivity extends AppCompatActivity {
         listView_GioHang.setAdapter(gioHangAdapter);
 
         Button btnThanhToan = findViewById(R.id.btnThanhToan);
+
+        Intent intent = getIntent();
+        final String Email = intent.getStringExtra("Email");
         Tong = 0;
-        final Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
+        final Cursor cursor = dataBaseHelper.GetData("Select * from GioHang where EmailnNguoiDung = '"+Email+"'");
         while (cursor.moveToNext()){
             gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
                     cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
@@ -72,7 +75,7 @@ public class GioHangActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dataBaseHelper.UpData("Delete from GioHang where Id = '"+gIoHangArrayList.get(vitri).iDMonAn+"'");
-                        Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
+                        Cursor cursor = dataBaseHelper.GetData("Select * from GioHang where EmailnNguoiDung = '"+Email+"'");
                         gIoHangArrayList.clear();
                         Tong = 0;
                         while (cursor.moveToNext()){
@@ -119,7 +122,7 @@ public class GioHangActivity extends AppCompatActivity {
                         "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer,ThoiGian char(30))");
                 dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS HoaDon(MaHoaDon Integer ," +
                         "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
-                dataBaseHelper.UpData("Insert into HoaDon values('"+random+"','hoangnam1101@gmail.com','"+Tong+"','"+date+"')");
+                dataBaseHelper.UpData("Insert into HoaDon values('"+random+"','"+Email+"','"+Tong+"','"+date+"')");
                 for(int i =0 ; i < gIoHangArrayList.size(); i++){
                     dataBaseHelper.UpData("Insert into ChiTietHD values('"+random+"','"+gIoHangArrayList.get(i).getTenMonAn()+"'," +
                             "'"+gIoHangArrayList.get(i).getTenQuan()+"','"+gIoHangArrayList.get(i).getDiaChi()+"'," +
@@ -131,7 +134,7 @@ public class GioHangActivity extends AppCompatActivity {
 //                    }
                 tvTongTien.setText("0"+" $");
                 Tong = 0;
-                dataBaseHelper.UpData("Delete from GioHang");
+                dataBaseHelper.UpData("Delete from GioHang where EmailnNguoiDung = '"+Email+"'");
                 startActivity(intent);
                 finish();
             }

@@ -8,23 +8,21 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <EditText
         android:background="@drawable/bg_dndk"
         android:id="@+id/edittext_username"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="250dp"
-        android:drawableRight="@drawable/usser"
+        android:drawableRight="@drawable/ic_baseline_alternate_email_24"
         android:gravity="center"
-        android:hint="Username"
+        android:hint="Email"
         android:paddingLeft="2dp"
         android:textSize="20dp"
         android:padding="10dp"
 
-
-
         />
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +31,7 @@
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittext_password"
-            android:layout_width="250dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_dndk"
             android:gravity="center"
@@ -61,7 +59,7 @@
         android:id="@+id/checkboxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/nhodangnhap"
+        android:text="Nhớ Mật Khẩu"
         android:textColor="#fff"
         android:textSize="15dp"></CheckBox>
 

@@ -46,7 +46,9 @@ public class MonAnActivity extends AppCompatActivity {
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer)");
 //        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
 //        dataBaseHelper.UpData("Insert into MonAn Values(null,'Cơm Gà','','82 Hùng Vương, phường Tự An, TP Buôn Ma Thuột, Đắk Lắk','"+R.drawable.comga+"',35)");
-        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
+        Intent intent = getIntent();
+        String TinhThanh = intent.getStringExtra("TinhThanh");
+        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where DiaChi LIKE '%"+TinhThanh+"%'");
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
             String TenMonAn = cursor.getString(1);
@@ -117,6 +119,16 @@ public class MonAnActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_mon_an, menu);
+        MenuItem mnu_Them = menu.findItem(R.id.mnu_Them);
+        Intent intent = getIntent();
+        String TenDangNhap = intent.getStringExtra("Email");
+        if (TenDangNhap.toLowerCase().equals("admin")) {
+
+            mnu_Them.setEnabled(true);
+        }
+        else {
+            mnu_Them.setEnabled(false);
+        }
         return true;
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -130,6 +142,9 @@ public class MonAnActivity extends AppCompatActivity {
                 break;
             case R.id.mnu_GioHang:
                 Intent inten = new Intent(this,GioHangActivity.class);
+                Intent in = getIntent();
+                String Email = in.getStringExtra("Email");
+                inten.putExtra("Email", Email);
                 startActivity(inten);
                 break;
             default:

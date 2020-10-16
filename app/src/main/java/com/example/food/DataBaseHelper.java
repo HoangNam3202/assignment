@@ -49,6 +49,16 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
         statement.executeInsert();
     }
+    public void Update_AVATAR(byte[] hinh,String Email){
+        SQLiteDatabase database = getWritableDatabase();
+        String sql = "Update TaiKhoan set  Hinh = ? where Email = ?" ;
+        SQLiteStatement statement = database.compileStatement(sql);
+        statement.clearBindings();
+        statement.bindBlob(1,hinh);
+        statement.bindString(2,Email);
+
+        statement.executeInsert();
+    }
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
@@ -84,13 +94,13 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-    public boolean checkUser(String name, String pass) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery("select * from DangNhap where User=? and Pass=?", new String[]{name, pass});
-
-        if (cursor.getCount() > 0) return true;
-        else return false;
-    }
+//    public boolean checkUser(String name, String pass) {
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+//        Cursor cursor = db.rawQuery("select * from DangNhap where User=? and Pass=?", new String[]{name, pass});
+//
+//        if (cursor.getCount() > 0) return true;
+//        else return false;
+//    }
 }
