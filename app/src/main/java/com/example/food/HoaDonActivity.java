@@ -61,8 +61,8 @@ public class HoaDonActivity extends AppCompatActivity {
                 builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataBaseHelper.UpData("delete from HoaDon where MaHoaDon = '"+hoaDonArrayList.get(i).getMaHoaDon()+"'");
-                        Cursor cursor = dataBaseHelper.GetData("select * from HoaDon EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
+                        dataBaseHelper.UpData("delete from HoaDon where MaHoaDon = '"+hoaDonArrayList.get(i).getMaHoaDon()+"' and EmailnNguoiDung = '"+Email+"'");
+                        Cursor cursor = dataBaseHelper.GetData("select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
                         hoaDonArrayList.clear();
                         while (cursor.moveToNext()){
                             int MaHoaDon = cursor.getInt(0);

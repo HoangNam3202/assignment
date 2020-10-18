@@ -56,6 +56,7 @@
             android:paddingLeft="2dp"
             />
         <Spinner
+            android:gravity="center"
             android:id="@+id/spnTinhThanh"
             android:layout_marginTop="30dp"
             android:layout_width="90dp"

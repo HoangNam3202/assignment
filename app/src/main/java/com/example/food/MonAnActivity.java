@@ -23,6 +23,7 @@ import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
 
+import static com.example.food.MainActivity.Email;
 import static com.example.food.ThemMonAnActivity.check_NutSua;
 
 public class MonAnActivity extends AppCompatActivity {
@@ -48,69 +49,89 @@ public class MonAnActivity extends AppCompatActivity {
 //        dataBaseHelper.UpData("Insert into MonAn Values(null,'Cơm Gà','','82 Hùng Vương, phường Tự An, TP Buôn Ma Thuột, Đắk Lắk','"+R.drawable.comga+"',35)");
         Intent intent = getIntent();
         String TinhThanh = intent.getStringExtra("TinhThanh");
-        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where DiaChi LIKE '%"+TinhThanh+"%'");
-        while (cursor.moveToNext()){
-            int id = cursor.getInt(0);
-            String TenMonAn = cursor.getString(1);
-            String TenQuan = cursor.getString(2);
-            String DiaChi = cursor.getString(3);
-            byte[] Hinh = cursor.getBlob(4);
-            int Gia = cursor.getInt(5);
+        String User = intent.getStringExtra("Email");
+        if (Email.equals("admin")) {
+            Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(0);
+                String TenMonAn = cursor.getString(1);
+                String TenQuan = cursor.getString(2);
+                String DiaChi = cursor.getString(3);
+                byte[] Hinh = cursor.getBlob(4);
+                int Gia = cursor.getInt(5);
 
-            arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+                arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+            }
+        }
+        else {
+            Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where DiaChi LIKE '%"+TinhThanh+"%'");
+            while (cursor.moveToNext()){
+                int id = cursor.getInt(0);
+                String TenMonAn = cursor.getString(1);
+                String TenQuan = cursor.getString(2);
+                String DiaChi = cursor.getString(3);
+                byte[] Hinh = cursor.getBlob(4);
+                int Gia = cursor.getInt(5);
+
+                arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+            }
         }
         listView_MonAn.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MonAnActivity.this, ""+arr.get(i).TenMonAn, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MonAnActivity.this,SuaMonAnActivity.class);
-                intent.putExtra("TenMonAnCanSua",arr.get(i).TenMonAn);
-                intent.putExtra("TenQuanCanSua",arr.get(i).TenQuan);
-                intent.putExtra("DiaChiCanSua",arr.get(i).DiaChi);
-                intent.putExtra("HinhCanSua",arr.get(i).HinhAnh);
-                intent.putExtra("GiaCanSua",arr.get(i).Gia);
-                intent.putExtra("Vitri",arr.get(i).iDMonAn);
-                if (!check_list) {
-                    startActivity(intent);
+                if (Email.equals("admin")) {
+                    Toast.makeText(MonAnActivity.this, ""+arr.get(i).TenMonAn, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MonAnActivity.this,SuaMonAnActivity.class);
+                    intent.putExtra("TenMonAnCanSua",arr.get(i).TenMonAn);
+                    intent.putExtra("TenQuanCanSua",arr.get(i).TenQuan);
+                    intent.putExtra("DiaChiCanSua",arr.get(i).DiaChi);
+                    intent.putExtra("HinhCanSua",arr.get(i).HinhAnh);
+                    intent.putExtra("GiaCanSua",arr.get(i).Gia);
+                    intent.putExtra("Vitri",arr.get(i).iDMonAn);
+                    if (!check_list) {
+                        startActivity(intent);
+                    }
                 }
             }
         });
         listView_MonAn.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                check_list = true;
-                final AlertDialog.Builder builder = new AlertDialog.Builder(MonAnActivity.this);
-                builder.setTitle("Xoá đơn hàng");
-                builder.setMessage("Bạn có thực sự muốn xoá "+arr.get(i).TenMonAn+"?");
-                final int vitri1 = i;
-                builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dataBaseHelper.UpData("Delete from MonAn where Id = '"+arr.get(vitri1).iDMonAn+"'");
-                        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
-                        arr.clear();
-                        while (cursor.moveToNext()){
-                            int id = cursor.getInt(0);
-                            String TenMonAn = cursor.getString(1);
-                            String TenQuan = cursor.getString(2);
-                            String DiaChi = cursor.getString(3);
-                            byte[] Hinh = cursor.getBlob(4);
-                            int Gia = cursor.getInt(5);
+                if (Email.equals("admin")) {
+                    check_list = true;
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(MonAnActivity.this);
+                    builder.setTitle("Xoá đơn hàng");
+                    builder.setMessage("Bạn có thực sự muốn xoá "+arr.get(i).TenMonAn+"?");
+                    final int vitri1 = i;
+                    builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dataBaseHelper.UpData("Delete from MonAn where Id = '"+arr.get(vitri1).iDMonAn+"'");
+                            Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
+                            arr.clear();
+                            while (cursor.moveToNext()){
+                                int id = cursor.getInt(0);
+                                String TenMonAn = cursor.getString(1);
+                                String TenQuan = cursor.getString(2);
+                                String DiaChi = cursor.getString(3);
+                                byte[] Hinh = cursor.getBlob(4);
+                                int Gia = cursor.getInt(5);
 
-                            arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+                                arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+                            }
+                            monAnAdapter.notifyDataSetChanged();
+                            check_list = false;
                         }
-                        monAnAdapter.notifyDataSetChanged();
-                        check_list = false;
-                    }
-                });
-                builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        check_list = false;
-                    }
-                });
+                    });
+                    builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            check_list = false;
+                        }
+                    });
 
-                builder.create().show();
+                    builder.create().show();
+                }
                 return false;
             }
         });
@@ -122,8 +143,7 @@ public class MonAnActivity extends AppCompatActivity {
         MenuItem mnu_Them = menu.findItem(R.id.mnu_Them);
         Intent intent = getIntent();
         String TenDangNhap = intent.getStringExtra("Email");
-        if (TenDangNhap.toLowerCase().equals("admin")) {
-
+        if (Email.toLowerCase().equals("admin")) {
             mnu_Them.setEnabled(true);
         }
         else {

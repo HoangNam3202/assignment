@@ -37,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
     int REQUEST_CODE = 4;
     ImageView imageView_Avatar;
     public static String Email;
-    String Address;
-    String Province;
+    public static String TenNguoiDung;
+    public static String Address;
+    public static String Province;
+    public static int SDT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer,ThoiGian char(30))");
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS HoaDon(MaHoaDon Integer ," +
                 "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
+        dataBaseHelper.UpData("Create table if not exists TaiKhoan(Hinh Blob,TenNguoiDung varchar(35), Email varchar(30) ," +
+                "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnMonAn.setOnClickListener(new View.OnClickListener() {
@@ -95,17 +99,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         TextView tvTenNguoiDung = findViewById(R.id.tvTenNguoiDung);
         TextView tvAddress = findViewById(R.id.tvAddress);
         imageView_Avatar = findViewById(R.id.imageView);
-        String TenNguoiDung = sharedPreferences.getString("TenNguoiDung","");
+         TenNguoiDung = sharedPreferences.getString("TenNguoiDung","");
         Address = sharedPreferences.getString("DiaChi","");
         Province = sharedPreferences.getString("TinhThanh","");
         Email = sharedPreferences.getString("taikhoan","");
+        SDT = sharedPreferences.getInt("SDT",0);
         String Pw = sharedPreferences.getString("matkhau","");
 
+        Button btnNguoiDung = findViewById(R.id.btnNguoiDung);
+        if (Email.equals("admin")) {
+            btnNguoiDung.setEnabled(true);
+        }
+        else {
+            btnNguoiDung.setEnabled(false);
+        }
+
         tvTenNguoiDung.setText(TenNguoiDung);
-        tvAddress.setText(Address);
+        tvAddress.setText(Address+", "+Province);
 
         imageView_Avatar.setOnClickListener(new View.OnClickListener() {
             @Override

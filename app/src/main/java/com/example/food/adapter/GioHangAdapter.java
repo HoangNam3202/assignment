@@ -31,6 +31,7 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.example.food.GioHangActivity.Tong;
 import static com.example.food.GioHangActivity.gIoHangArrayList;
 import static com.example.food.GioHangActivity.gioHangAdapter;
+import static com.example.food.MainActivity.Email;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class GioHangAdapter extends BaseAdapter {
@@ -109,8 +110,8 @@ public class GioHangAdapter extends BaseAdapter {
                 abc = Integer.parseInt(edtSoLuong.getText().toString());
                 if (abc != 0) {
                     xyz *= Integer.parseInt(edtSoLuong.getText().toString());
-                    dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where Id = '"+GioHang.getiDMonAn()+"'");
-                    Cursor cursor = dataBaseHelper.GetData("Select * from GioHang");
+                    dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where Id = '"+GioHang.getiDMonAn()+"' and EmailnNguoiDung = '"+Email+"'");
+                    Cursor cursor = dataBaseHelper.GetData("Select * from GioHang where EmailnNguoiDung = '"+Email+"'");
                     gIoHangArrayList.clear();
                     Tong = 0;
                     while (cursor.moveToNext()){

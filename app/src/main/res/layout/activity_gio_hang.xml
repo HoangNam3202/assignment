@@ -14,6 +14,7 @@
         android:layout_marginTop="5dp"
         >
         <TextView
+            android:id="@+id/btnChinhSuaThongTin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chỉnh sửa thông tin"
@@ -39,6 +40,7 @@
             android:text="Tên Người Nhận : "
             />
         <TextView
+            android:id="@+id/tvTenNguoiDung_GioHang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="NGười 1"
@@ -57,6 +59,7 @@
                 android:text="Địa chỉ : "
                 />
             <TextView
+                android:id="@+id/tvDiaChi_GioHang"
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:text="82 Hùng Vương"
@@ -75,6 +78,7 @@
                 android:text="Số điện thoại : "
                 />
             <TextView
+                android:id="@+id/tvSDT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0363202401"

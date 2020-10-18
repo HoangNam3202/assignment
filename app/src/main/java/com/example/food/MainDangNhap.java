@@ -67,6 +67,7 @@ public class MainDangNhap extends AppCompatActivity {
                             editor.putString("TenNguoiDung", cursor.getString(1));
                             editor.putString("DiaChi", cursor.getString(3));
                             editor.putString("TinhThanh", cursor.getString(4));
+                            editor.putInt("SDT", cursor.getInt(5));
                         }
                         editor.putBoolean("checked", true);
                         editor.commit();
@@ -85,6 +86,8 @@ public class MainDangNhap extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
 

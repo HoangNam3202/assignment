@@ -32,6 +32,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
+import static com.example.food.MainActivity.Address;
+import static com.example.food.MainActivity.SDT;
+import static com.example.food.MainActivity.TenNguoiDung;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 import static com.example.food.adapter.GioHangAdapter.MangCanXoa;
 import static com.example.food.adapter.GioHangAdapter.edtSoLuong;
@@ -74,7 +77,7 @@ public class GioHangActivity extends AppCompatActivity {
                 builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dataBaseHelper.UpData("Delete from GioHang where Id = '"+gIoHangArrayList.get(vitri).iDMonAn+"'");
+                        dataBaseHelper.UpData("Delete from GioHang where Id = '"+gIoHangArrayList.get(vitri).iDMonAn+"' and EmailnNguoiDung = '"+Email+"'");
                         Cursor cursor = dataBaseHelper.GetData("Select * from GioHang where EmailnNguoiDung = '"+Email+"'");
                         gIoHangArrayList.clear();
                         Tong = 0;
@@ -126,7 +129,7 @@ public class GioHangActivity extends AppCompatActivity {
                 for(int i =0 ; i < gIoHangArrayList.size(); i++){
                     dataBaseHelper.UpData("Insert into ChiTietHD values('"+random+"','"+gIoHangArrayList.get(i).getTenMonAn()+"'," +
                             "'"+gIoHangArrayList.get(i).getTenQuan()+"','"+gIoHangArrayList.get(i).getDiaChi()+"'," +
-                            "'hoangnam1101@gmail.com','"+gIoHangArrayList.get(i).getGia()+"','"+gIoHangArrayList.get(i).getSoLuong()+"','"+date+"')");
+                            "'"+Email+"','"+gIoHangArrayList.get(i).getGia()+"','"+gIoHangArrayList.get(i).getSoLuong()+"','"+date+"')");
                 }
 //                    Cursor contro = dataBaseHelper.GetData("Select *from HoaDon");
 //                    while (contro.moveToNext()){
@@ -156,10 +159,10 @@ public class GioHangActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             for (int i=0; i < MangCanXoa.size();i++){
-                                dataBaseHelper.UpData("delete from GioHang where Id = '"+MangCanXoa.get(i)+"'");
+                                dataBaseHelper.UpData("delete from GioHang where Id = '"+MangCanXoa.get(i)+"' and EmailnNguoiDung = '"+Email+"'");
                             }
                             Tong = 0;
-                            Cursor cursor = dataBaseHelper.GetData("select * from GioHang");
+                            Cursor cursor = dataBaseHelper.GetData("select * from GioHang where EmailnNguoiDung = '"+Email+"'");
                             gIoHangArrayList.clear();
                             while (cursor.moveToNext()){
                                 gIoHangArrayList.add(new GIoHang(cursor.getInt(0),cursor.getString(1),cursor.getString(2),
@@ -178,6 +181,22 @@ public class GioHangActivity extends AppCompatActivity {
                     builder.create().show();
 
                 }
+            }
+        });
+
+        TextView tvNguoiDung_GioHang = findViewById(R.id.tvTenNguoiDung_GioHang);
+        TextView tvDiaChi_GioHang = findViewById(R.id.tvDiaChi_GioHang);
+        TextView tvSDT_GioHang = findViewById(R.id.tvSDT);
+        TextView btnChinhSuaThongTin = findViewById(R.id.btnChinhSuaThongTin);
+
+        tvNguoiDung_GioHang.setText(TenNguoiDung);
+        tvDiaChi_GioHang.setText(Address);
+        tvSDT_GioHang.setText(""+SDT);
+
+        btnChinhSuaThongTin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

@@ -127,16 +127,14 @@
         <Button
             android:id="@+id/btnCaiDat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="Cài Đặt"
+            android:text="Đăng xuất"
             android:drawablePadding="10dp"
             android:padding="10dp"
-            android:drawableLeft="@drawable/customer"
-            android:drawableRight="@drawable/customer"
             android:background="@drawable/bg_item"
             />
     </LinearLayout>
@@ -146,6 +144,7 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/btnNguoiDung"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
