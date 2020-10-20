@@ -20,7 +20,7 @@ import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class RegisterActivity extends AppCompatActivity {
 
-
+    boolean check_mail = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +43,8 @@ public class RegisterActivity extends AppCompatActivity {
 //        dataBaseHelper.UpData("Drop table TaiKhoan");
         dataBaseHelper.UpData("Create table if not exists TaiKhoan(Hinh Blob,TenNguoiDung varchar(35), Email varchar(30) ," +
                 "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
-
-        final String check_Mail = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        final String check_Phone =  "0\\d{9,10}";
+        final String check_Mail = "[a-zA-Z0-9.]+@[a-z]+\\.+[a-z]+";
         btnDangKi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,10 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
                 final String CFPass = edittext_cnf_password.getText().toString();
 //                String Location = Address + "," + Province;
                 if (!edittext_username.getText().toString().equals("")) {
-                    if (!edittext_email.getText().toString().equals("")) {
+                    if (!edittext_email.getText().toString().equals("") && check_mail == true) {
                         if (!edittext_address.getText().toString().equals("")) {
                             if(!Province.equals("")){
-                                if (!edittext_number.getText().toString().equals("") && PhoneNB.length() <= 11) {
+                                if (!edittext_number.getText().toString().equals("") && PhoneNB.length() <= 11 && PhoneNB.matches(check_Phone)) {
                                     if (!edittext_password.getText().toString().equals("") && Pass.length() >= 5) {
                                         if (!edittext_cnf_password.getText().toString().equals("") && CFPass.equals(Pass)) {
                                             Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+edittext_email.getText().toString()+"'");
@@ -112,6 +112,26 @@ public class RegisterActivity extends AppCompatActivity {
                 finish();
             }
         });
+        edittext_email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (charSequence.toString().matches(check_Mail)) {
+                    check_mail = true;
+                }
+                else {
+                    check_mail = false;
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 }
