@@ -62,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(!Province.equals("")){
                                 if (!edittext_number.getText().toString().equals("") && PhoneNB.length() <= 11) {
                                     if (!edittext_password.getText().toString().equals("") && Pass.length() >= 5) {
-                                        if (!edittext_cnf_password.getText().toString().equals("")) {
+                                        if (!edittext_cnf_password.getText().toString().equals("") && CFPass.equals(Pass)) {
                                             Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+edittext_email.getText().toString()+"'");
                                             if (cursor.getCount()>0) {
                                                 edittext_email.setError("Email đã tồn tại");

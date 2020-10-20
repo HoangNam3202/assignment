@@ -111,6 +111,13 @@ public class MainActivity extends AppCompatActivity {
         String Pw = sharedPreferences.getString("matkhau","");
 
         Button btnNguoiDung = findViewById(R.id.btnNguoiDung);
+        btnNguoiDung.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,UserManagerActivity.class);
+                startActivity(intent);
+            }
+        });
         if (Email.equals("admin")) {
             btnNguoiDung.setEnabled(true);
         }

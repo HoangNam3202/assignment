@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".ChiTietHDActivity"></activity>
+        <activity android:name=".UserManagerActivity"></activity>
+        <activity android:name=".ChiTietHDActivity" />
         <activity android:name=".SuaMonAnActivity" />
         <activity android:name=".HoaDonActivity" />
 
@@ -36,7 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
     </application>
 
