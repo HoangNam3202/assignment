@@ -13,6 +13,8 @@ import com.example.food.object.HoaDon;
 
 import java.util.List;
 
+import static com.example.food.MainActivity.Email;
+
 public class HoaDonAdapter extends BaseAdapter {
     public Context context;
     public int layout;
@@ -47,6 +49,7 @@ public class HoaDonAdapter extends BaseAdapter {
         TextView tvThoiGian = view.findViewById(R.id.tvThoiGian);
         TextView tvGia_HoaDon = view.findViewById(R.id.tvGia_HoaDon);
         TextView tvMaHoaDon = view.findViewById(R.id.tvMaHoaDon);
+        TextView tvTenNguoiDung_HoaDon = view.findViewById(R.id.tvTenNguoiDung_HoaDon);
 
         HoaDon hoaDon = hoaDonList.get(i);
 
@@ -54,6 +57,12 @@ public class HoaDonAdapter extends BaseAdapter {
         tvGia_HoaDon.setText(""+hoaDon.getTongTien());
         tvMaHoaDon.setText("Mã hóa đơn : "+hoaDon.getMaHoaDon());
 
+        if (Email.equals("admin")) {
+            tvTenNguoiDung_HoaDon.setText(hoaDon.getEmailNguoiDung());
+        }
+        else {
+            tvTenNguoiDung_HoaDon.setText("");
+        }
 
         return view;
     }

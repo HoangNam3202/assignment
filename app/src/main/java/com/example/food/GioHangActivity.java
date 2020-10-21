@@ -33,6 +33,9 @@ import java.util.Date;
 import java.util.Random;
 
 import static com.example.food.MainActivity.Address;
+import static com.example.food.MainActivity.Email;
+import static com.example.food.MainActivity.Province;
+import static com.example.food.MainActivity.Pw;
 import static com.example.food.MainActivity.SDT;
 import static com.example.food.MainActivity.TenNguoiDung;
 import static com.example.food.MonAnActivity.dataBaseHelper;
@@ -45,10 +48,12 @@ public class GioHangActivity extends AppCompatActivity {
     int vitri ;
     public static ArrayList<GIoHang> gIoHangArrayList;
     public static GioHangAdapter gioHangAdapter;
+    static GioHangActivity gioHangActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
+        gioHangActivity = this;
         dataBaseHelper = new DataBaseHelper(GioHangActivity.this,"CSDL1",null,1);
         final TextView tvTongTien = findViewById(R.id.tvTongTien);
         gIoHangArrayList = new ArrayList<>();
@@ -59,7 +64,7 @@ public class GioHangActivity extends AppCompatActivity {
         Button btnThanhToan = findViewById(R.id.btnThanhToan);
 
         Intent intent = getIntent();
-        final String Email = intent.getStringExtra("Email");
+//        final String Email = intent.getStringExtra("Email");
         Tong = 0;
         final Cursor cursor = dataBaseHelper.GetData("Select * from GioHang where EmailnNguoiDung = '"+Email+"'");
         while (cursor.moveToNext()){
@@ -189,16 +194,31 @@ public class GioHangActivity extends AppCompatActivity {
         TextView tvSDT_GioHang = findViewById(R.id.tvSDT);
         TextView btnChinhSuaThongTin = findViewById(R.id.btnChinhSuaThongTin);
 
-        tvNguoiDung_GioHang.setText(TenNguoiDung);
-        tvDiaChi_GioHang.setText(Address);
-        tvSDT_GioHang.setText(""+SDT);
+        Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+Email+"'");
+        while (cursor1.moveToNext()) {
+            tvNguoiDung_GioHang.setText(cursor1.getString(1));
+            tvDiaChi_GioHang.setText(cursor1.getString(3));
+            tvSDT_GioHang.setText(""+cursor1.getInt(5));
+        }
 
         btnChinhSuaThongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent1 = new Intent(GioHangActivity.this,ChinhsuaThongTin.class);
+                Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+Email+"'");
+                while (cursor1.moveToNext()) {
+                    intent1.putExtra("Email",cursor1.getString(2));
+                    intent1.putExtra("TenNguoiDung",cursor1.getString(1));
+                    intent1.putExtra("Address",cursor1.getString(3));
+                    intent1.putExtra("SDT",cursor1.getInt(5));
+                    intent1.putExtra("Pass",cursor1.getString(6));
+                    intent1.putExtra("TinhThanh",cursor1.getString(4));
+                }
+                startActivity(intent1);
             }
         });
     }
-
+    public static GioHangActivity getInstance(){
+        return   gioHangActivity;
+    }
 }

@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Food</string>
     <string name="dangki">Đăng kí</string>
-    <string name="chuacotaikhoan">Bạn chưa có tài khoản?</string>
+    <string name="chuacotaikhoan">Bạn chưa có tài khoản ?</string>
     <string name="nhodangnhap">Nhớ đăng nhập</string>
     <string name="password">Password</string>
     <string name="username">User Name</string>
     <string name="confirm_password">Comfirm Password</string>
     <string name="register">Đăng kí</string>
-    <string name="already_registered">Bạn đã có tài khoảng!!!</string>
+    <string name="already_registered">Bạn đã có tài khoảng !!!</string>
     <string name="login1">Đăng nhập</string>
 </resources>

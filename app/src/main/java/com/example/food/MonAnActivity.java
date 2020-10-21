@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.food.adapter.MonAnAdapter;
 import com.example.food.object.GIoHang;
@@ -34,6 +35,7 @@ public class MonAnActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mon_an);
+
         ListView listView_MonAn = findViewById(R.id.listMonAn);
         arr = new ArrayList<>();
         final MonAnAdapter monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
@@ -136,6 +138,10 @@ public class MonAnActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void setSupportActionBar(Toolbar toolbar) {
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();

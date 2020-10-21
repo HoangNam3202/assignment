@@ -32,14 +32,25 @@ public class HoaDonActivity extends AppCompatActivity {
         final HoaDonAdapter hoaDonAdapter = new HoaDonAdapter(HoaDonActivity.this,R.layout.row_of_hoa_don,hoaDonArrayList);
         ListView listView_HoaDon = findViewById(R.id.list_HoaDon);
         listView_HoaDon.setAdapter(hoaDonAdapter);
-
-        Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
-        while (cursor.moveToNext()) {
-            int MaHoaDon = cursor.getInt(0);
-            String EmailNguoiDung = cursor.getString(1);
-            int TongTien = cursor.getInt(2);
-            String Ngay = cursor.getString(3);
-            hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+        if (Email.equals("admin")) {
+            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon ORDER BY ThoiGian desc");
+            while (cursor.moveToNext()) {
+                int MaHoaDon = cursor.getInt(0);
+                String EmailNguoiDung = cursor.getString(1);
+                int TongTien = cursor.getInt(2);
+                String Ngay = cursor.getString(3);
+                hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+            }
+        }
+        else {
+            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
+            while (cursor.moveToNext()) {
+                int MaHoaDon = cursor.getInt(0);
+                String EmailNguoiDung = cursor.getString(1);
+                int TongTien = cursor.getInt(2);
+                String Ngay = cursor.getString(3);
+                hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+            }
         }
         listView_HoaDon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,14 +73,25 @@ public class HoaDonActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dataBaseHelper.UpData("delete from HoaDon where MaHoaDon = '"+hoaDonArrayList.get(i).getMaHoaDon()+"' and EmailnNguoiDung = '"+Email+"'");
-                        Cursor cursor = dataBaseHelper.GetData("select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
-                        hoaDonArrayList.clear();
-                        while (cursor.moveToNext()){
-                            int MaHoaDon = cursor.getInt(0);
-                            String EmailNguoiDung = cursor.getString(1);
-                            int TongTien = cursor.getInt(2);
-                            String Ngay = cursor.getString(3);
-                            hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+                        if (Email.equals("admin")) {
+                            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon ORDER BY ThoiGian desc");
+                            while (cursor.moveToNext()) {
+                                int MaHoaDon = cursor.getInt(0);
+                                String EmailNguoiDung = cursor.getString(1);
+                                int TongTien = cursor.getInt(2);
+                                String Ngay = cursor.getString(3);
+                                hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+                            }
+                        }
+                        else {
+                            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
+                            while (cursor.moveToNext()) {
+                                int MaHoaDon = cursor.getInt(0);
+                                String EmailNguoiDung = cursor.getString(1);
+                                int TongTien = cursor.getInt(2);
+                                String Ngay = cursor.getString(3);
+                                hoaDonArrayList.add(new HoaDon(MaHoaDon,EmailNguoiDung,TongTien,Ngay));
+                            }
                         }
                         hoaDonAdapter.notifyDataSetChanged();
                         check_list_click = true;

@@ -37,11 +37,19 @@ public class ChiTietHDActivity extends AppCompatActivity {
         TextView tvNgayDat = findViewById(R.id.tvNgayDat);
         tvMaHoaDon.setText("Mã hóa đơn : "+MaHoaDon_ChiTiet);
         tvNgayDat.setText("Ngày đặt : "+ThoiGian);
-
-        Cursor cursor = dataBaseHelper.GetData("Select * from ChiTietHD where MaHoaDon = '"+MaHoaDon_ChiTiet+"' and EmailnNguoiDung = '"+Email+"'");
-        while (cursor.moveToNext()) {
-            chiTietHDArrayList.add(new ChiTietHD(cursor.getInt(0),cursor.getInt(5),cursor.getInt(6),
-                    cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(7)));
+        if(Email.equals("admin")){
+            Cursor cursor = dataBaseHelper.GetData("Select * from ChiTietHD where MaHoaDon = '"+MaHoaDon_ChiTiet+"'");
+            while (cursor.moveToNext()) {
+                chiTietHDArrayList.add(new ChiTietHD(cursor.getInt(0),cursor.getInt(5),cursor.getInt(6),
+                        cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(7)));
+            }
+        }
+        else {
+            Cursor cursor = dataBaseHelper.GetData("Select * from ChiTietHD where MaHoaDon = '"+MaHoaDon_ChiTiet+"' and EmailnNguoiDung = '"+Email+"'");
+            while (cursor.moveToNext()) {
+                chiTietHDArrayList.add(new ChiTietHD(cursor.getInt(0),cursor.getInt(5),cursor.getInt(6),
+                        cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getString(7)));
+            }
         }
     }
 }

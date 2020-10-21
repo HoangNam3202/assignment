@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     public static String TenNguoiDung;
     public static String Address;
     public static String Province;
+    public static String Pw;
     public static int SDT;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         Province = sharedPreferences.getString("TinhThanh","");
         Email = sharedPreferences.getString("taikhoan","");
         SDT = sharedPreferences.getInt("SDT",0);
-        String Pw = sharedPreferences.getString("matkhau","");
+        Pw = sharedPreferences.getString("matkhau","");
 
         Button btnNguoiDung = findViewById(R.id.btnNguoiDung);
         btnNguoiDung.setOnClickListener(new View.OnClickListener() {

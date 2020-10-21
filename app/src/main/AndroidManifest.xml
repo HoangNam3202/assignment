@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".UserManagerActivity"></activity>
+        <activity android:name=".ChinhsuaThongTin"></activity>
+        <activity android:name=".UserManagerActivity" />
         <activity android:name=".ChiTietHDActivity" />
         <activity android:name=".SuaMonAnActivity" />
         <activity android:name=".HoaDonActivity" />

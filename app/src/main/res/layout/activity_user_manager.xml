@@ -4,10 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".UserManagerActivity">
-    <ListView
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColorHint="#000"
+        android:backgroundTint="#000"
+        app:hintEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Người Dùng"
+            android:id="@+id/edtTenNguoiDung"
+            android:drawableRight="@drawable/ic_baseline_search_24"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <ListView
         android:id="@+id/list_User"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="590dp" />
 </LinearLayout>

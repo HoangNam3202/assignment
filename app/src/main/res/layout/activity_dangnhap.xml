@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/hinhnen"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="550dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg_login"
+    android:layout_marginTop="130dp"
 
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="26dp"
+        android:textColor="#000"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        />
     <EditText
         android:background="@drawable/bg_dndk"
         android:id="@+id/edittext_username"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="20dp"
         android:drawableRight="@drawable/ic_baseline_alternate_email_24"
         android:gravity="center"
         android:hint="Email"
@@ -44,24 +65,24 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <Button
         android:id="@+id/botton_login"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:text="Đăng nhập"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_item"
-        ></Button>
+        android:text="Đăng nhập"></Button>
 
     <CheckBox
-        android:layout_marginTop="20dp"
         android:id="@+id/checkboxRemember"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Nhớ Mật Khẩu"
-        android:textColor="#fff"
-        android:textSize="15dp"></CheckBox>
+        android:textColor="#000"
+        android:textSize="15dp">
+
+    </CheckBox>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -73,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:text="@string/chuacotaikhoan"
-            android:textColor="#fff" />
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/textview_register"
@@ -81,9 +102,11 @@
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:text="@string/dangki"
-            android:textColor="#04ea00"
+            android:textColor="#EA0000"
             android:textStyle="bold" />
     </LinearLayout>
 
+</LinearLayout>
 
 </LinearLayout>
+</ScrollView>
