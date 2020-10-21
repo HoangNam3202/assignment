@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 Intent intent = new Intent(MainActivity.this, MainDangNhap.class);
                 startActivity(intent);
+                finish();
             }
         });
 
