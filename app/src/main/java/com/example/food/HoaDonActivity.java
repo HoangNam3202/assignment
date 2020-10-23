@@ -74,7 +74,7 @@ public class HoaDonActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dataBaseHelper.UpData("delete from HoaDon where MaHoaDon = '"+hoaDonArrayList.get(i).getMaHoaDon()+"' and EmailnNguoiDung = '"+Email+"'");
                         if (Email.equals("admin")) {
-                            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon ORDER BY ThoiGian desc");
+                            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon where EmailnNguoiDung = '"+Email+"' ORDER BY ThoiGian desc");
                             while (cursor.moveToNext()) {
                                 int MaHoaDon = cursor.getInt(0);
                                 String EmailNguoiDung = cursor.getString(1);

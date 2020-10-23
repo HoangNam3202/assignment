@@ -2,8 +2,11 @@ package com.example.food;
 
 import android.app.Service;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.IBinder;
 import android.widget.Toast;
+
+import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class ServiceGioHang extends Service {
     public ServiceGioHang() {
@@ -17,8 +20,9 @@ public class ServiceGioHang extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        intent.getIntArrayExtra("Chuoi");
-        Toast.makeText(this, ""+intent.getIntArrayExtra("Chuoi"), Toast.LENGTH_SHORT).show();
-        return super.onStartCommand(intent, flags, startId);
+        dataBaseHelper = new DataBaseHelper(this,"CSDL1",null,1);
+        Cursor cursor = dataBaseHelper.GetData("");
+
+        return START_NOT_STICKY;
     }
 }
