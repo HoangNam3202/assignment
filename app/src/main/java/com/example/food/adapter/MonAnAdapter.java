@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.food.MainDangNhap;
 import com.example.food.R;
 import com.example.food.ServiceGioHang;
 import com.example.food.object.GIoHang;
@@ -31,6 +32,7 @@ import static com.example.food.GioHangActivity.Tong;
 import static com.example.food.GioHangActivity.gIoHangArrayList;
 import static com.example.food.GioHangActivity.gioHangAdapter;
 import static com.example.food.MainActivity.Email;
+import static com.example.food.MainDangNhap.check_internet;
 import static com.example.food.MonAnActivity.arr;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
@@ -90,35 +92,41 @@ public class MonAnAdapter extends BaseAdapter {
         btnDatMon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ItemGiohang.add(monAn.getiDMonAn());
-                String TenMonAn = "";
-                String TenQuan = "";
-                String DiaChi = "";
-                int Gia = 0 ;
-                for(int i = 0 ; i < ItemGiohang.size(); i++){
-                    Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where Id = '"+ItemGiohang.get(i)+"'");
-                    while (cursor.moveToNext()){
-                        int id = cursor.getInt(0);
-                        TenMonAn = cursor.getString(1);
-                        TenQuan = cursor.getString(2);
-                        DiaChi = cursor.getString(3);
-                        Gia = cursor.getInt(5);
-                    }
-                    Cursor contro = dataBaseHelper.GetData("Select * from GioHang where TenMonAn = '"+monAn.getTenMonAn()+"' and EmailnNguoiDung = '"+Email+"'");
-                    if(contro.getCount() > 0 ){
-                        int abc = 0;
-                        while (contro.moveToNext()){
-                            abc = contro.getInt(6);
+                if(check_internet) {
+                    ItemGiohang.add(monAn.getiDMonAn());
+                    String TenMonAn = "";
+                    String TenQuan = "";
+                    String DiaChi = "";
+                    int Gia = 0 ;
+                    for(int i = 0 ; i < ItemGiohang.size(); i++){
+                        Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where Id = '"+ItemGiohang.get(i)+"'");
+                        while (cursor.moveToNext()){
+                            int id = cursor.getInt(0);
+                            TenMonAn = cursor.getString(1);
+                            TenQuan = cursor.getString(2);
+                            DiaChi = cursor.getString(3);
+                            Gia = cursor.getInt(5);
                         }
-                        abc++;
-                        dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where TenMonAn = '"+monAn.getTenMonAn()+"'");
+                        Cursor contro = dataBaseHelper.GetData("Select * from GioHang where TenMonAn = '"+monAn.getTenMonAn()+"' and EmailnNguoiDung = '"+Email+"'");
+                        if(contro.getCount() > 0 ){
+                            int abc = 0;
+                            while (contro.moveToNext()){
+                                abc = contro.getInt(6);
+                            }
+                            abc++;
+                            dataBaseHelper.UpData("Update GioHang set SoLuong = '"+abc+"' where TenMonAn = '"+monAn.getTenMonAn()+"'");
+                        }
+                        else {
+                            dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','"+Email+"','"+Gia+"',1)");
+                        }
+                        Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
+                        ItemGiohang.clear();
                     }
-                    else {
-                        dataBaseHelper.UpData("Insert into GioHang values(null,'"+TenMonAn+"','"+TenQuan+"','"+DiaChi+"','"+Email+"','"+Gia+"',1)");
-                    }
-                    Toast.makeText(context, "Đặt thành công "+TenMonAn, Toast.LENGTH_SHORT).show();
-                    ItemGiohang.clear();
                 }
+                else {
+                    Toast.makeText(context, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         return view;

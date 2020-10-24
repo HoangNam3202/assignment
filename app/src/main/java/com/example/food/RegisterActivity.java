@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.food.MainDangNhap.check_internet;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -56,51 +57,56 @@ public class RegisterActivity extends AppCompatActivity {
                 final String Pass = edittext_password.getText().toString();
                 final String CFPass = edittext_cnf_password.getText().toString();
 //                String Location = Address + "," + Province;
-                if (!edittext_username.getText().toString().equals("")) {
-                    if (!edittext_email.getText().toString().equals("") && check_mail == true) {
-                        if (!edittext_address.getText().toString().equals("")) {
-                            if(!Province.equals("")){
-                                if (!edittext_number.getText().toString().equals("") && PhoneNB.length() <= 11 && PhoneNB.matches(check_Phone)) {
-                                    if (!edittext_password.getText().toString().equals("") && Pass.length() >= 5) {
-                                        if (!edittext_cnf_password.getText().toString().equals("") && CFPass.equals(Pass)) {
-                                            Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+edittext_email.getText().toString()+"'");
-                                            if (cursor.getCount()>0) {
-                                                edittext_email.setError("Email đã tồn tại");
+                if(check_internet) {
+                    if (!edittext_username.getText().toString().equals("")) {
+                        if (!edittext_email.getText().toString().equals("") && check_mail == true) {
+                            if (!edittext_address.getText().toString().equals("")) {
+                                if(!Province.equals("")){
+                                    if (!edittext_number.getText().toString().equals("") && PhoneNB.length() <= 11 && PhoneNB.matches(check_Phone)) {
+                                        if (!edittext_password.getText().toString().equals("") && Pass.length() >= 5) {
+                                            if (!edittext_cnf_password.getText().toString().equals("") && CFPass.equals(Pass)) {
+                                                Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+edittext_email.getText().toString()+"'");
+                                                if (cursor.getCount()>0) {
+                                                    edittext_email.setError("Email đã tồn tại");
+                                                }
+                                                else {
+                                                    dataBaseHelper.UpData("Insert into TaiKhoan values(null,'"+UserName+"','"+Email+"'," +
+                                                            "'"+Address+"','"+Province+"','"+PhoneNB+"','"+Pass+"')");
+                                                    Toast.makeText(RegisterActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(RegisterActivity.this,MainDangNhap.class);
+                                                    finish();
+                                                }
                                             }
                                             else {
-                                                dataBaseHelper.UpData("Insert into TaiKhoan values(null,'"+UserName+"','"+Email+"'," +
-                                                        "'"+Address+"','"+Province+"','"+PhoneNB+"','"+Pass+"')");
-                                                Toast.makeText(RegisterActivity.this, "Đăng kí thành công", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(RegisterActivity.this,MainDangNhap.class);
-                                                finish();
+                                                edittext_cnf_password.setError("Chưa điền hoặc không khớp với mật khẩu");
                                             }
                                         }
                                         else {
-                                            edittext_cnf_password.setError("Chưa điền hoặc không khớp với mật khẩu");
+                                            edittext_password.setError("Không để rỗng và phải lớn hơn 5 ký tự");
                                         }
                                     }
                                     else {
-                                            edittext_password.setError("Không để rỗng và phải lớn hơn 5 ký tự");
+                                        edittext_number.setError("Chưa điền hoặc sai định dạng");
                                     }
                                 }
                                 else {
-                                    edittext_number.setError("Chưa điền hoặc sai định dạng");
+                                    spin.setBackgroundResource(R.drawable.bg_error);
                                 }
                             }
                             else {
-                                spin.setBackgroundResource(R.drawable.bg_error);
+                                edittext_address.setError("Chưa điền");
                             }
                         }
                         else {
-                            edittext_address.setError("Chưa điền");
+                            edittext_email.setError("Chưa điền hoặc sai định dạng");
                         }
                     }
                     else {
-                        edittext_email.setError("Chưa điền hoặc sai định dạng");
+                        edittext_username.setError("Chưa điền");
                     }
                 }
                 else {
-                    edittext_username.setError("Chưa điền");
+                    Toast.makeText(RegisterActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
                 }
             }
         });

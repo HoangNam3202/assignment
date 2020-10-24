@@ -75,8 +75,13 @@ public class MainDangNhap extends AppCompatActivity {
         mTextViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent registerIntent = new Intent(MainDangNhap.this, RegisterActivity.class);
-                startActivity(registerIntent);
+                if(check_internet) {
+                    Intent registerIntent = new Intent(MainDangNhap.this, RegisterActivity.class);
+                    startActivity(registerIntent);
+                }
+                else {
+                    Toast.makeText(MainDangNhap.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         String Mail_DangNhap = mySharedPreferences.getString("taikhoan","");

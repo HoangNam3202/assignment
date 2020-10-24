@@ -38,6 +38,7 @@ import static com.example.food.MainActivity.Province;
 import static com.example.food.MainActivity.Pw;
 import static com.example.food.MainActivity.SDT;
 import static com.example.food.MainActivity.TenNguoiDung;
+import static com.example.food.MainDangNhap.check_internet;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 import static com.example.food.adapter.GioHangAdapter.MangCanXoa;
 import static com.example.food.adapter.GioHangAdapter.edtSoLuong;
@@ -119,32 +120,37 @@ public class GioHangActivity extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GioHangActivity.this,HoaDonActivity.class);
-                final int random = new Random().nextInt(1000000000);
-                Calendar c = Calendar.getInstance();
-                Date date = c.getTime();
+                if(check_internet) {
+                    Intent intent = new Intent(GioHangActivity.this,HoaDonActivity.class);
+                    final int random = new Random().nextInt(1000000000);
+                    Calendar c = Calendar.getInstance();
+                    Date date = c.getTime();
 //                Toast.makeText(GioHangActivity.this, ""+date, Toast.LENGTH_SHORT).show();
 //                dataBaseHelper.UpData("drop table HoaDon");
 //                dataBaseHelper.UpData("drop table ChiTietHD");
-                dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS ChiTietHD(MaHoaDon Integer ," +
-                        "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer,ThoiGian char(30))");
-                dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS HoaDon(MaHoaDon Integer ," +
-                        "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
-                dataBaseHelper.UpData("Insert into HoaDon values('"+random+"','"+Email+"','"+Tong+"','"+date+"')");
-                for(int i =0 ; i < gIoHangArrayList.size(); i++){
-                    dataBaseHelper.UpData("Insert into ChiTietHD values('"+random+"','"+gIoHangArrayList.get(i).getTenMonAn()+"'," +
-                            "'"+gIoHangArrayList.get(i).getTenQuan()+"','"+gIoHangArrayList.get(i).getDiaChi()+"'," +
-                            "'"+Email+"','"+gIoHangArrayList.get(i).getGia()+"','"+gIoHangArrayList.get(i).getSoLuong()+"','"+date+"')");
-                }
+                    dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS ChiTietHD(MaHoaDon Integer ," +
+                            "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer,ThoiGian char(30))");
+                    dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS HoaDon(MaHoaDon Integer ," +
+                            "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
+                    dataBaseHelper.UpData("Insert into HoaDon values('"+random+"','"+Email+"','"+Tong+"','"+date+"')");
+                    for(int i =0 ; i < gIoHangArrayList.size(); i++){
+                        dataBaseHelper.UpData("Insert into ChiTietHD values('"+random+"','"+gIoHangArrayList.get(i).getTenMonAn()+"'," +
+                                "'"+gIoHangArrayList.get(i).getTenQuan()+"','"+gIoHangArrayList.get(i).getDiaChi()+"'," +
+                                "'"+Email+"','"+gIoHangArrayList.get(i).getGia()+"','"+gIoHangArrayList.get(i).getSoLuong()+"','"+date+"')");
+                    }
 //                    Cursor contro = dataBaseHelper.GetData("Select *from HoaDon");
 //                    while (contro.moveToNext()){
 //                        Toast.makeText(GioHangActivity.this, ""+contro.getString(3), Toast.LENGTH_SHORT).show();
 //                    }
-                tvTongTien.setText("0"+" $");
-                Tong = 0;
-                dataBaseHelper.UpData("Delete from GioHang where EmailnNguoiDung = '"+Email+"'");
-                startActivity(intent);
-                finish();
+                    tvTongTien.setText("0"+" $");
+                    Tong = 0;
+                    dataBaseHelper.UpData("Delete from GioHang where EmailnNguoiDung = '"+Email+"'");
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(GioHangActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         TextView tvXoaItem = findViewById(R.id.tvXoaItem);
