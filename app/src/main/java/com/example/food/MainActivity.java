@@ -28,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import static com.example.food.MainDangNhap.check_internet;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -63,30 +64,46 @@ public class MainActivity extends AppCompatActivity {
         btnMonAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,MonAnActivity.class);
-                intent.putExtra("Email", Email);
-                intent.putExtra("Address", Address);
-                intent.putExtra("TinhThanh", Province);
-                startActivity(intent);
+                if(check_internet){
+                    Intent intent = new Intent(MainActivity.this,MonAnActivity.class);
+                    intent.putExtra("Email", Email);
+                    intent.putExtra("Address", Address);
+                    intent.putExtra("TinhThanh", Province);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         Button btnGioHang = findViewById(R.id.btnGioHang);
         btnGioHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,GioHangActivity.class);
-                intent.putExtra("Email", Email);
-                startActivity(intent);
-                finish();
+                if(check_internet){
+                    Intent intent = new Intent(MainActivity.this,GioHangActivity.class);
+                    intent.putExtra("Email", Email);
+                    startActivity(intent);
+                    finish();
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Button btnHoaDon = findViewById(R.id.btnHoaDon);
         btnHoaDon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, HoaDonActivity.class);
-                intent.putExtra("Email", Email);
-                startActivity(intent);
+                if(check_internet){
+                    Intent intent = new Intent(MainActivity.this, HoaDonActivity.class);
+                    intent.putExtra("Email", Email);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         Button btnCaiDat = findViewById(R.id.btnCaiDat);
