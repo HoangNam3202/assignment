@@ -33,7 +33,7 @@ public class HoaDonActivity extends AppCompatActivity {
         ListView listView_HoaDon = findViewById(R.id.list_HoaDon);
         listView_HoaDon.setAdapter(hoaDonAdapter);
         if (Email.equals("admin")) {
-            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon ORDER BY ThoiGian desc");
+            Cursor cursor = dataBaseHelper.GetData("Select * from HoaDon ORDER BY ThoiGian asc");
             while (cursor.moveToNext()) {
                 int MaHoaDon = cursor.getInt(0);
                 String EmailNguoiDung = cursor.getString(1);

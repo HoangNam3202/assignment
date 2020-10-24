@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 "EmailnNguoiDung varchar(35), TongTien Integer, ThoiGian char(30))");
         dataBaseHelper.UpData("Create table if not exists TaiKhoan(Hinh Blob,TenNguoiDung varchar(35), Email varchar(30) ," +
                 "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
+        dataBaseHelper.UpData("Create table if not exists ThongBao(Email varchar(35), MaDonHang Integer)");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         btnMonAn.setOnClickListener(new View.OnClickListener() {
