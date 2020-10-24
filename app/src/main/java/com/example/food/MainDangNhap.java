@@ -28,6 +28,7 @@ public class MainDangNhap extends AppCompatActivity {
     CheckBox cbRemember;
     SharedPreferences mySharedPreferences;
     String pwd;
+    String user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,13 @@ public class MainDangNhap extends AppCompatActivity {
         String Pass_DangNhap = mySharedPreferences.getString("matkhau","");
         if (!Mail_DangNhap.equals("") && !Pass_DangNhap.equals("")) {
             Intent intent = new Intent(MainDangNhap.this,MainActivity.class);
+            Cursor cursor = db.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
+            while (cursor.moveToNext()) {
+                editor.putString("TenNguoiDung", cursor.getString(1));
+                editor.putString("DiaChi", cursor.getString(3));
+                editor.putString("TinhThanh", cursor.getString(4));
+                editor.putInt("SDT", cursor.getInt(5));
+            }
             startActivity(intent);
         }
 
@@ -62,7 +70,7 @@ public class MainDangNhap extends AppCompatActivity {
         mButtonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String user = mTextUsername.getText().toString().trim();
+                user = mTextUsername.getText().toString().trim();
                 pwd = mTextPassword.getText().toString().trim();
                 if (!user.equals("")) {
                     if (!pwd.equals("")) {

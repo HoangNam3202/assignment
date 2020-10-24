@@ -221,4 +221,9 @@ public class GioHangActivity extends AppCompatActivity {
     public static GioHangActivity getInstance(){
         return   gioHangActivity;
     }
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(GioHangActivity.this,MainActivity.class);
+        startActivity(intent);
+    }
 }

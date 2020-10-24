@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,GioHangActivity.class);
                 intent.putExtra("Email", Email);
                 startActivity(intent);
+                finish();
             }
         });
         Button btnHoaDon = findViewById(R.id.btnHoaDon);
@@ -107,10 +108,16 @@ public class MainActivity extends AppCompatActivity {
         TextView tvAddress = findViewById(R.id.tvAddress);
         imageView_Avatar = findViewById(R.id.imageView);
          TenNguoiDung = sharedPreferences.getString("TenNguoiDung","");
-        Address = sharedPreferences.getString("DiaChi","");
-        Province = sharedPreferences.getString("TinhThanh","");
+//        Address = sharedPreferences.getString("DiaChi","");
+//        Province = sharedPreferences.getString("TinhThanh","");
         Email = sharedPreferences.getString("taikhoan","");
-        SDT = sharedPreferences.getInt("SDT",0);
+        Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+Email+"'");
+        while (cursor.moveToNext()) {
+            Province = cursor.getString(4);
+            Address = cursor.getString(3);
+            SDT = cursor.getInt(5);
+        }
+//        SDT = sharedPreferences.getInt("SDT",0);
         Pw = sharedPreferences.getString("matkhau","");
 
         Button btnNguoiDung = findViewById(R.id.btnNguoiDung);
