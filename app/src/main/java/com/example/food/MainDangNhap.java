@@ -25,12 +25,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.food.broadcast.MyReceiver;
 import com.google.android.material.textfield.TextInputLayout;
 
+import static com.example.food.MonAnActivity.dataBaseHelper;
+
 public class MainDangNhap extends AppCompatActivity {
     EditText mTextUsername;
     EditText mTextPassword;
     Button mButtonLogin;
     TextView mTextViewRegister;
-    DataBaseHelper db;
+    DataBaseHelper dataBaseHelper;
     CheckBox cbRemember;
     SharedPreferences mySharedPreferences;
     String pwd;
@@ -62,8 +64,17 @@ public class MainDangNhap extends AppCompatActivity {
 //            Toast.makeText(this, "Khong co mang", Toast.LENGTH_SHORT).show();
             check_internet = false;
         }
-        db = new DataBaseHelper(this,"CSDL1",null,1);
-//        db.QueryData("CREATE TABLE IF NOT EXISTS DangNhap (Id INTEGER PRIMARY KEY AUTOINCREMENT, User VARCHAR(200), Pass VARCHAR(200))");
+
+        dataBaseHelper = new DataBaseHelper(this,"CSDL1",null,1);
+        dataBaseHelper.UpData("Create table if not exists TaiKhoan(Hinh Blob,TenNguoiDung varchar(35), Email varchar(30) ," +
+                "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
+        Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email LIKE '%admin%'");
+        if (cursor1.getCount()>0) {
+            dataBaseHelper.UpData("delete from TaiKhoan where Email = 'admin'");
+        }
+        else {
+            dataBaseHelper.UpData("Insert into TaiKhoan values(null,'admin','admin',null,null,null,'admin')");
+        }
         mySharedPreferences =getSharedPreferences("dataLogin", MODE_PRIVATE);
         final SharedPreferences.Editor editor = mySharedPreferences.edit();
 
@@ -88,7 +99,7 @@ public class MainDangNhap extends AppCompatActivity {
         String Pass_DangNhap = mySharedPreferences.getString("matkhau","");
         if (!Mail_DangNhap.equals("") && !Pass_DangNhap.equals("") && check_internet) {
             Intent intent = new Intent(MainDangNhap.this,MainActivity.class);
-            Cursor cursor = db.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
+            Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
             while (cursor.moveToNext()) {
                 editor.putString("TenNguoiDung", cursor.getString(1));
                 editor.putString("DiaChi", cursor.getString(3));
@@ -109,7 +120,7 @@ public class MainDangNhap extends AppCompatActivity {
                 if(check_internet){
                     if (!user.equals("")) {
                         if (!pwd.equals("")) {
-                            Cursor cursor = db.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
+                            Cursor cursor = dataBaseHelper.GetData("Select * from TaiKhoan where Email = '"+user+"' and Pass = '"+pwd+"'");
                             if (cursor.getCount() > 0){
                                 if (cbRemember.isChecked()){
                                     editor.putString("taikhoan", user);
