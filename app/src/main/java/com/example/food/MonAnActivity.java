@@ -45,8 +45,8 @@ public class MonAnActivity extends AppCompatActivity {
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS MonAn(Id Integer primary key autoincrement," +
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), Hinh Blob, Gia Integer)");
 //        dataBaseHelper.UpData("drop table GioHang");
-        dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
-                "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer)");
+//        dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
+//                "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer, SoLuong Integer)");
 //        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
 //        dataBaseHelper.UpData("Insert into MonAn Values(null,'Cơm Gà','','82 Hùng Vương, phường Tự An, TP Buôn Ma Thuột, Đắk Lắk','"+R.drawable.comga+"',35)");
         Intent intent = getIntent();

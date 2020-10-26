@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -113,9 +114,11 @@ public class GioHangActivity extends AppCompatActivity {
         });
         if (cursor.getCount() > 0) {
             btnThanhToan.setEnabled(true);
+            btnThanhToan.setTextColor(Color.parseColor("#000"));
         }
         else {
             btnThanhToan.setEnabled(false);
+            btnThanhToan.setTextColor(Color.parseColor("#FF817D7D"));
         }
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
