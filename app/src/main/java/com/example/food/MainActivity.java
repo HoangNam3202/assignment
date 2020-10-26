@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         initPreferences();
         Button btnMonAn = findViewById(R.id.btnMonAn);
         dataBaseHelper = new DataBaseHelper(MainActivity.this,"CSDL1",null,1);
-        dataBaseHelper.UpData("drop table GioHang");
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
                 "TenMonAn varchar(35), TenQuan varchar(20), DiaChi varchar(50), EmailnNguoiDung varchar(35), Gia Integer,SoLuong Integer)");
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS ChiTietHD(MaHoaDon Integer ," +
