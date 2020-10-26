@@ -1,7 +1,6 @@
 package com.example.food.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -9,31 +8,20 @@ import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.food.MainDangNhap;
 import com.example.food.R;
-import com.example.food.ServiceGioHang;
-import com.example.food.object.GIoHang;
 import com.example.food.object.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.example.food.GioHangActivity.Tong;
-import static com.example.food.GioHangActivity.gIoHangArrayList;
-import static com.example.food.GioHangActivity.gioHangAdapter;
 import static com.example.food.MainActivity.Email;
 import static com.example.food.MainDangNhap.check_internet;
-import static com.example.food.MonAnActivity.arr;
 import static com.example.food.MonAnActivity.dataBaseHelper;
 
 public class MonAnAdapter extends BaseAdapter {

@@ -70,7 +70,8 @@ public class MainDangNhap extends AppCompatActivity {
                 "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
         Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email LIKE '%admin%'");
         if (cursor1.getCount()>0) {
-
+            dataBaseHelper.UpData("delete from TaiKhoan where Email = 'admin'");
+            dataBaseHelper.UpData("Insert into TaiKhoan values(null,'admin','admin',null,null,null,'admin')");
         }
         else {
             dataBaseHelper.UpData("Insert into TaiKhoan values(null,'admin','admin',null,null,null,'admin')");

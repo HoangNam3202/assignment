@@ -36,7 +36,7 @@
         </receiver>
 
         <service
-            android:name=".ServiceGioHang"
+            android:name=".ServiceThongBao"
             android:enabled="true"
             android:exported="true" />
 

@@ -5,6 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +29,7 @@ import com.example.food.object.HoaDon;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Calendar;
 
 import static com.example.food.MainDangNhap.check_internet;
 import static com.example.food.MonAnActivity.dataBaseHelper;
@@ -43,11 +46,15 @@ public class MainActivity extends AppCompatActivity {
     public static String Province;
     public static String Pw;
     public static int SDT;
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initPreferences();
+
+
         Button btnMonAn = findViewById(R.id.btnMonAn);
         dataBaseHelper = new DataBaseHelper(MainActivity.this,"CSDL1",null,1);
         dataBaseHelper.UpData("CREATE TABLE IF NOT EXISTS GioHang(Id Integer primary key autoincrement," +
@@ -61,6 +68,16 @@ public class MainActivity extends AppCompatActivity {
         dataBaseHelper.UpData("Create table if not exists ThongBao(Email varchar(35), MaDonHang Integer)");
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        final Calendar calendar = Calendar.getInstance();
+        final Intent intent = new Intent(MainActivity.this,AlarmReceiver.class);
+        if (check_internet) {
+//            pendingIntent = PendingIntent.getBroadcast(MainActivity.this,0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+//            alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
+            Intent intent_service = new Intent(MainActivity.this,ServiceThongBao.class);
+            intent_service.putExtra("Email",Email);
+            startService(intent_service);
+        }
         btnMonAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
