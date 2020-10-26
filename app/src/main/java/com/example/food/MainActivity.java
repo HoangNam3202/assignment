@@ -171,6 +171,19 @@ public class MainActivity extends AppCompatActivity {
                 imageView_Avatar.setImageBitmap(bitmap);
             }
         }
+        TextView webView_link = findViewById(R.id.webView_link);
+        webView_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (check_internet) {
+                    Intent intent = new Intent(MainActivity.this,WebViewAcitivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(MainActivity.this, "Vui Lòng Kết Nối Internet", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     private void initPreferences() {
         sharedPreferences = getSharedPreferences("dataLogin",MODE_PRIVATE);

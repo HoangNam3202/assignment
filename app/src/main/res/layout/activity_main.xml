@@ -155,5 +155,16 @@
             android:background="@drawable/bg_item"
             />
     </LinearLayout>
+    <TextView
+        android:id="@+id/webView_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tham khảo thêm tại\n https://www.foody.vn/"
+        android:textColor="#68E46D"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:textStyle="italic"
+        />
 </LinearLayout>
 </ScrollView>
