@@ -114,11 +114,11 @@ public class GioHangActivity extends AppCompatActivity {
         });
         if (cursor.getCount() > 0) {
             btnThanhToan.setEnabled(true);
-            btnThanhToan.setTextColor(Color.parseColor("#000"));
+//            btnThanhToan.setTextColor(Color.parseColor("#000"));
         }
         else {
             btnThanhToan.setEnabled(false);
-            btnThanhToan.setTextColor(Color.parseColor("#FF817D7D"));
+//            btnThanhToan.setTextColor(Color.parseColor("#FF817D7D"));
         }
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
