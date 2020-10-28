@@ -68,7 +68,7 @@ public class MainDangNhap extends AppCompatActivity {
         dataBaseHelper = new DataBaseHelper(this,"CSDL1",null,1);
         dataBaseHelper.UpData("Create table if not exists TaiKhoan(Hinh Blob,TenNguoiDung varchar(35), Email varchar(30) ," +
                 "DiaChi varchar(50),Tinh varchar(20), SDT integer, Pass varchar(20))");
-        Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email LIKE '%admin%'");
+        Cursor cursor1 = dataBaseHelper.GetData("Select * from TaiKhoan where Email = 'admin'");
         if (cursor1.getCount()>0) {
 //            dataBaseHelper.UpData("delete from TaiKhoan where Email = 'admin'");
 //            dataBaseHelper.UpData("Insert into TaiKhoan values(null,'admin','admin',null,null,null,'admin')");
