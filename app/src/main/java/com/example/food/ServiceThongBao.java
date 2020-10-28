@@ -29,7 +29,7 @@ public class ServiceThongBao extends Service {
 //        if(intent != null){
 //            EmailNhan = intent.getStringExtra("Email");
 //        }
-//        Toast.makeText(this, "testServiceThongBao", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "testServiceThongBao", Toast.LENGTH_SHORT).show();
         dataBaseHelper = new DataBaseHelper(this,"CSDL1",null,1);
         Cursor cursor = dataBaseHelper.GetData("Select * from ThongBao where Email = '"+Email+"'");
         if(cursor.getCount() > 0){

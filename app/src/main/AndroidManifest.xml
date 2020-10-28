@@ -59,6 +59,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
+        <receiver android:name=".broadcast.AlarmReceiver" />
     </application>
 
 </manifest>

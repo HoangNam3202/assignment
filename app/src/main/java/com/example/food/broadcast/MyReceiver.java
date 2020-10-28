@@ -30,29 +30,29 @@ public class MyReceiver extends BroadcastReceiver {
 //        throw new UnsupportedOperationException("Not yet implemented");
 //        LayoutInflater mInflater = LayoutInflater.from(context);
 //        View myView = mInflater.inflate(R.layout.activity_main, null);
-//        final String action = intent.getAction();
-//        if (action.equals(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)) {
-//            if (intent.getBooleanExtra(WifiManager.EXTRA_SUPPLICANT_CONNECTED, false)) {
-////                Toast.makeText(context, "Wifi", Toast.LENGTH_SHORT).show();
-//                check_internet = true;
-//            } else {
-////                Toast.makeText(context, "Khong co mang", Toast.LENGTH_SHORT).show();
-//                check_internet = false;
-//            }
-//        }
-        NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
-        if(info != null && info.isConnected()) {
-            // Do your work.
-            check_internet = true;
-
-            // e.g. To check the Network Name or other info:
-            WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
-            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            String ssid = wifiInfo.getSSID();
-        }
-        else {
+        final String action = intent.getAction();
+        if (action.equals(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION)) {
+            if (intent.getBooleanExtra(WifiManager.EXTRA_SUPPLICANT_CONNECTED, false)) {
+//                Toast.makeText(context, "Wifi", Toast.LENGTH_SHORT).show();
+                check_internet = true;
+            } else {
 //                Toast.makeText(context, "Khong co mang", Toast.LENGTH_SHORT).show();
-            check_internet = false;
+                check_internet = false;
+            }
         }
+//        NetworkInfo info = intent.getParcelableExtra(WifiManager.EXTRA_NETWORK_INFO);
+//        if(info != null && info.isConnected()) {
+//            // Do your work.
+//            check_internet = true;
+//
+//            // e.g. To check the Network Name or other info:
+//            WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
+//            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+//            String ssid = wifiInfo.getSSID();
+//        }
+//        else {
+////                Toast.makeText(context, "Khong co mang", Toast.LENGTH_SHORT).show();
+//            check_internet = false;
+//        }
     }
 }
