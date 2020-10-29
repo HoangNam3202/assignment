@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_width="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/hinhnen"
@@ -14,23 +14,23 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="550dp"
-    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity"
     android:background="@drawable/bg_login"
-    android:layout_marginTop="130dp"
-
+    android:layout_marginTop="150dp"
     >
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
         android:textSize="26dp"
-        android:textColor="#000"
-        android:layout_marginLeft="40dp"
+        android:textColor="#FFFFFF"
+        android:layout_marginLeft="60dp"
         android:layout_marginTop="30dp"
+        android:textStyle="bold"
         />
     <EditText
+        android:layout_gravity="center"
         android:background="@drawable/bg_dndk"
         android:id="@+id/edittext_username"
         android:layout_width="300dp"
@@ -49,6 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:id="@+id/textInputLayout"
+        android:layout_gravity="center"
         app:hintEnabled="false"
         app:passwordToggleEnabled="true">
         <com.google.android.material.textfield.TextInputEditText
@@ -65,37 +66,48 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <Button
-        android:id="@+id/botton_login"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_item"
-        android:text="Đăng nhập"></Button>
-
-    <CheckBox
-        android:id="@+id/checkboxRemember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Nhớ Mật Khẩu"
-        android:textColor="#000000"
-        android:textSize="15dp">
-
-    </CheckBox>
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/checkboxRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="Nhớ Mật Khẩu"
+            android:textColor="#FFF"
+            android:buttonTint="#fff"
+            android:textSize="15dp">
+
+        </CheckBox>
+    <Button
+        android:id="@+id/botton_login"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="25dp"
+        android:background="@drawable/bg_btn"
+        android:text="Đăng nhập">
+
+    </Button>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
             android:text="@string/chuacotaikhoan"
-            android:textColor="#000" />
+            android:textColor="#FFF" />
 
         <TextView
             android:id="@+id/textview_register"
@@ -103,7 +115,7 @@
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
             android:text="@string/dangki"
-            android:textColor="#EA0000"
+            android:textColor="#F83E3E"
             android:textStyle="bold" />
     </LinearLayout>
 
