@@ -52,6 +52,9 @@ public class MainDangNhap extends AppCompatActivity {
         filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
         filter.addAction(WifiManager.EXTRA_RESULTS_UPDATED);
         this.registerReceiver(broadcastReceiver, filter);
+        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.login);
+        TextView tvLogin = findViewById(R.id.tvLogin);
+        tvLogin.setAnimation(animation);
         if (WIFI != null && WIFI.isConnected()) {
 //            Toast.makeText(this, "Wifi", Toast.LENGTH_SHORT).show();
             check_internet = true;

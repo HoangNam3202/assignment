@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -31,6 +32,8 @@ public class MonAnActivity extends AppCompatActivity {
     public static DataBaseHelper dataBaseHelper;
     public static ArrayList<MonAn> arr;
     boolean check_list = false;
+    String TinhThanh;
+    MonAnAdapter monAnAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +41,7 @@ public class MonAnActivity extends AppCompatActivity {
 
         ListView listView_MonAn = findViewById(R.id.listMonAn);
         arr = new ArrayList<>();
-        final MonAnAdapter monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
+        monAnAdapter = new MonAnAdapter(MonAnActivity.this,R.layout.row_of_mon_an,arr);
         listView_MonAn.setAdapter(monAnAdapter);
 
         dataBaseHelper = new DataBaseHelper(MonAnActivity.this,"CSDL1",null,1);
@@ -50,7 +53,7 @@ public class MonAnActivity extends AppCompatActivity {
 //        dataBaseHelper.UpData("Delete from MonAn where TenQuan ='Năm Chân'");
 //        dataBaseHelper.UpData("Insert into MonAn Values(null,'Cơm Gà','','82 Hùng Vương, phường Tự An, TP Buôn Ma Thuột, Đắk Lắk','"+R.drawable.comga+"',35)");
         Intent intent = getIntent();
-        String TinhThanh = intent.getStringExtra("TinhThanh");
+        TinhThanh = intent.getStringExtra("TinhThanh");
         String User = intent.getStringExtra("Email");
         if (Email.equals("admin")) {
             Cursor cursor = dataBaseHelper.GetData("Select * from MonAn");
@@ -155,6 +158,35 @@ public class MonAnActivity extends AppCompatActivity {
         else {
             mnu_Them.setEnabled(false);
         }
+        MenuItem searchItem = menu.findItem(R.id.mnu_Search);
+        final SearchView searchView =
+                (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Cursor cursor = dataBaseHelper.GetData("Select * from MonAn where TenMonAn LIKE '%"+searchView.getQuery().toString()+"%' AND DiaChi LIKE '%"+TinhThanh+"%'");
+                arr.clear();
+                while (cursor.moveToNext()){
+                    int id = cursor.getInt(0);
+                    String TenMonAn = cursor.getString(1);
+                    String TenQuan = cursor.getString(2);
+                    String DiaChi = cursor.getString(3);
+                    byte[] Hinh = cursor.getBlob(4);
+                    int Gia = cursor.getInt(5);
+
+                    arr.add(new MonAn(id,TenMonAn,TenQuan,DiaChi,Hinh,Gia));
+                }
+                monAnAdapter.notifyDataSetChanged();
+
+//                Toast.makeText(MonAnActivity.this, searchView.getQuery(), Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
         return true;
     }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -173,6 +205,7 @@ public class MonAnActivity extends AppCompatActivity {
                 inten.putExtra("Email", Email);
                 startActivity(inten);
                 break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

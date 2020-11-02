@@ -15,4 +15,12 @@
         >
 
     </item>
+    <item
+        android:id="@+id/mnu_Search"
+        android:title="Giỏ Hàng"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"
+        >
+
+    </item>
 </menu>
